@@ -1,16 +1,26 @@
-## Hi there 👋
+# Trend4media - Creator & TikTok Partner-Agentur Website
 
-<!--
-**Trend4Media/Trend4media** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+## 🚀 Über das Projekt
 
-Here are some ideas to get you started:
+Moderne, visuell beeindruckende Website für Trend4media - eine führende TikTok Creator und Shop Partner-Agentur. Die Website nutzt cutting-edge Webtechnologien und starke visuelle Effekte, um die dynamische Natur der TikTok-Plattform widerzuspiegeln.
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+## ✨ Features
+
+- **Modernes Design**: Glassmorphism-Effekte, Neon-Akzente im TikTok-Style
+- **Animationen**: Smooth Scroll, Parallax-Effekte, Hover-Animationen
+- **Responsive**: Vollständig optimiert für alle Geräte
+- **Performance**: Optimierte Ladezeiten mit Loading Screen
+- **Interaktivität**: Dynamische Counter, Form-Validierung, Mouse-Tracking-Effekte
+
+## 🎨 Design-Elemente
+
+- **Farbschema**: TikTok-inspirierte Farben (Cyan, Violet, Red)
+- **Typography**: Moderne, cleane Schriftarten
+- **Effects**: 
+  - Parallax-Scrolling
+  - Gradient-Animationen
+  - Glassmorphism
+  - Micro-Interactions
+  - Loading-Animationen
+
+## 📁 Projektstruktur
