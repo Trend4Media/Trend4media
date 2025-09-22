@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trend4media - Creator & TikTok Partner-Agentur</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-dark: #0a0a0a;
+            --primary-light: #ffffff;
+            --tiktok-red: #ff0050;
+            --tiktok-cyan: #00f2ea;
+            --tiktok-violet: #8b45ff;
+            --trend4-pink: #EC0B7A;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--primary-dark);
+            color: var(--primary-light);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 5%;
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            padding: 1rem 5%;
+            background: rgba(10, 10, 10, 0.95);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 300;
+            letter-spacing: -0.05em;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-trend {
+            color: var(--primary-light);
+        }
+
+        .logo-4 {
+            color: var(--trend4-pink);
+            font-weight: 700;
+            font-size: 2.2rem;
+            margin: 0 -0.1em;
+        }
+
+        .logo-media {
+            color: var(--primary-light);
+        }
+
+        @keyframes glow {
+            0%, 100% { filter: brightness(1); }
+            50% { filter: brightness(1.2) drop-shadow(0 0 20px rgba(0, 242, 234, 0.5)); }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--primary-light);
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            transition: all 0.3s ease;
+            padding: 0.5rem 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--tiktok-cyan), var(--tiktok-violet));
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            margin-top: -80px;
+            padding-top: 80px;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 50%, rgba(0, 242, 234, 0.1), transparent 50%),
+                        radial-gradient(circle at 80% 50%, rgba(139, 69, 255, 0.1), transparent 50%),
+                        radial-gradient(circle at 50% 50%, rgba(255, 0, 80, 0.05), transparent 50%);
+            animation: pulse 10s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.1); opacity: 1; }
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+            position: relative;
+            max-width: 1000px;
+            padding: 0 2rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 7vw, 5rem);
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, var(--tiktok-cyan), var(--tiktok-violet), var(--tiktok-red));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% 200%;
+            animation: gradient 3s ease infinite;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            margin-bottom: 2.5rem;
+            font-weight: 300;
+        }
+
+        .tiktok-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 50px;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .tiktok-badge::before {
+            content: '✓';
+            background: linear-gradient(45deg, var(--tiktok-cyan), var(--tiktok-violet));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: bold;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--tiktok-cyan), var(--tiktok-violet));
+            color: var(--primary-light);
+            box-shadow: 0 10px 30px rgba(0, 242, 234, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(0, 242, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary-light);
+            border: 2px solid var(--glass-border);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover {
+            background: var(--glass-bg);
+            border-color: var(--tiktok-cyan);
+            transform: translateY(-2px);
+        }
+
+        /* Sections */
+        section {
+            padding: 5rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .section-title {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        /* Creator Section */
+        .creators-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .creator-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .creator-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 242, 234, 0.1), transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .creator-card:hover::before {
+            opacity: 1;
+        }
+
+        .creator-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: var(--tiktok-cyan);
+            box-shadow: 0 20px 40px rgba(0, 242, 234, 0.2);
+        }
+
+        .creator-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--tiktok-cyan), var(--tiktok-violet));
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: bold;
+            position: relative;
+            animation: rotate 10s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .creator-card:hover .creator-avatar {
+            animation-play-state: paused;
+        }
+
+        .creator-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .creator-stats {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--glass-border);
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--tiktok-cyan);
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            margin-top: 0.25rem;
+        }
+
+        /* Services */
+        .services-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .service-card {
+            background: linear-gradient(135deg, var(--glass-bg), rgba(255, 255, 255, 0.02));
+            border: 1px solid var(--glass-border);
+            border-radius: 25px;
+            padding: 3rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .service-card::after {
+            content: '';
+            position: absolute;
+            top: -100%;
+            left: -100%;
+            width: 300%;
+            height: 300%;
+            background: linear-gradient(45deg, transparent, rgba(0, 242, 234, 0.03), transparent);
+            transform: rotate(45deg);
+            transition: all 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .service-card:hover::after {
+            top: -50%;
+            left: -50%;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--tiktok-violet);
+            box-shadow: 0 30px 60px rgba(139, 69, 255, 0.15);
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 1.5rem;
+            border-radius: 20px;
+            background: linear-gradient(135deg, var(--tiktok-cyan), var(--tiktok-violet));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            animation: pulse-icon 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse-icon {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .service-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .service-description {
+            line-height: 1.6;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        .service-features {
+            list-style: none;
+        }
+
+        .service-features li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .service-features li::before {
+            content: '→';
+            color: var(--tiktok-cyan);
+            font-weight: bold;
+        }
+
+        /* Login Section */
+        .login-section {
+            text-align: center;
+            padding: 6rem 5%;
+            background: linear-gradient(135deg, rgba(0, 242, 234, 0.02), rgba(139, 69, 255, 0.02));
+            border-radius: 30px;
+            margin: 4rem auto;
+        }
+
+        .login-card {
+            max-width: 500px;
+            margin: 0 auto;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 25px;
+            padding: 3rem;
+            backdrop-filter: blur(20px);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            opacity: 0.9;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            border-radius: 10px;
+            color: var(--primary-light);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--tiktok-cyan);
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 0 20px rgba(0, 242, 234, 0.1);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 3rem 5%;
+            border-top: 1px solid var(--glass-border);
+            margin-top: 5rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .social-links a {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: var(--primary-light);
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: linear-gradient(135deg, var(--tiktok-cyan), var(--tiktok-violet));
+            transform: translateY(-5px) rotate(5deg);
+            box-shadow: 0 10px 30px rgba(0, 242, 234, 0.3);
+        }
+
+        /* Parallax Elements */
+        .parallax-element {
+            position: fixed;
+            pointer-events: none;
+            opacity: 0.1;
+            z-index: -1;
+        }
+
+        .circle-1 {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: var(--tiktok-cyan);
+            filter: blur(100px);
+            top: 20%;
+            left: -150px;
+        }
+
+        .circle-2 {
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: var(--tiktok-violet);
+            filter: blur(120px);
+            bottom: 20%;
+            right: -200px;
+        }
+
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(10px); }
+        }
+
+        .scroll-indicator::after {
+            content: '↓';
+            font-size: 2rem;
+            color: var(--tiktok-cyan);
+            filter: drop-shadow(0 0 10px rgba(0, 242, 234, 0.5));
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .creators-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .services-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Loading Animation */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: var(--primary-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            animation: fadeOut 0.5s ease 2s forwards;
+        }
+
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
+                visibility: hidden;
+            }
+        }
+
+        .loader {
+            width: 60px;
+            height: 60px;
+            border: 3px solid transparent;
+            border-top-color: var(--tiktok-cyan);
+            border-right-color: var(--tiktok-violet);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Parallax Background Elements -->
+    <div class="parallax-element circle-1"></div>
+    <div class="parallax-element circle-2"></div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <span class="logo-trend">trend</span><span class="logo-4">4</span><span class="logo-media">media</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#creators">Creator*innen</a></li>
+                <li><a href="#live-agency">Live·Agentur</a></li>
+                <li><a href="#shop-agency">Shop·Agentur</a></li>
+                <li><a href="#login">Login</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <div class="tiktok-badge">Offizieller TikTok Partner</div>
+            <h1 style="margin-bottom: 1rem;">
+                <span style="color: var(--primary-light); font-weight: 300; font-size: 0.8em; display: block; margin-bottom: 0.5rem;">Willkommen bei</span>
+                <span style="color: var(--primary-light); font-weight: 300; font-size: 1.2em;">trend</span><span style="color: var(--trend4-pink); font-weight: 700; font-size: 1.3em;">4</span><span style="color: var(--primary-light); font-weight: 300; font-size: 1.2em;">media</span>
+            </h1>
+            <h2 style="font-size: 2.2rem; font-weight: 700; margin: 1.5rem 0; background: linear-gradient(135deg, var(--tiktok-cyan), var(--trend4-pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                "Network makes the dream work."
+            </h2>
+            <p style="font-size: 1.4rem; margin: 2rem 0 1rem; font-weight: 500;">
+                Wir repräsentieren die moderne <span class="gradient-text">TikTok LIVE-Agentur</span>:
+            </p>
+            <p class="hero-subtitle" style="font-size: 1.2rem; margin-bottom: 1.5rem;">
+                Trend4Media unterstützt Live-Creator, die dafür gemacht sind, Live zu beeindrucken.
+            </p>
+            <p style="font-style: italic; opacity: 0.9; font-size: 1.1rem; margin-bottom: 2.5rem; letter-spacing: 0.05em;">
+                innovativ, begleitend, effektiv & lösungsorientiert – 24/7
+            </p>
+            <div class="cta-buttons">
+                <a href="#creators" class="btn btn-primary">Creator werden</a>
+                <a href="#contact" class="btn btn-secondary">Let's Talk!</a>
+            </div>
+        </div>
+        <div class="scroll-indicator"></div>
+    </section>
+
+    <!-- About Section - Neu hinzugefügt -->
+    <section id="about" style="background: linear-gradient(135deg, rgba(236, 11, 122, 0.02), rgba(0, 242, 234, 0.02)); border-radius: 30px; margin: 4rem auto;">
+        <h2 class="section-title">Über <span class="gradient-text">trend4media</span></h2>
+        <div style="max-width: 900px; margin: 0 auto; text-align: center;">
+            <p style="font-size: 1.3rem; line-height: 1.8; margin-bottom: 2rem; font-weight: 500;">
+                Mit über <span style="color: var(--trend4-pink); font-weight: 700;">10 Jahren Erfahrung</span> im Bereich Marketing, 
+                Consulting & Social Media sind wir dein verlässlicher Partner im TikTok-Universum.
+            </p>
+            <p style="font-size: 1.1rem; line-height: 1.8; opacity: 0.9;">
+                Unser geschultes Team aus Beratern, Designern, Textern, Developern und Vertrieblern 
+                arbeitet <span style="font-style: italic;">innovativ, begleitend, effektiv & lösungsorientiert</span> – 
+                und das rund um die Uhr für deinen Erfolg.
+            </p>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin-top: 3rem;">
+                <div class="stat-card" style="background: var(--glass-bg); border: 1px solid var(--glass-border); padding: 2rem; border-radius: 20px; backdrop-filter: blur(10px);">
+                    <div style="font-size: 3rem; font-weight: bold; color: var(--trend4-pink);">24/7</div>
+                    <div style="margin-top: 0.5rem; opacity: 0.8;">Support & Betreuung</div>
+                </div>
+                <div class="stat-card" style="background: var(--glass-bg); border: 1px solid var(--glass-border); padding: 2rem; border-radius: 20px; backdrop-filter: blur(10px);">
+                    <div style="font-size: 3rem; font-weight: bold; color: var(--tiktok-cyan);">10+</div>
+                    <div style="margin-top: 0.5rem; opacity: 0.8;">Jahre Erfahrung</div>
+                </div>
+                <div class="stat-card" style="background: var(--glass-bg); border: 1px solid var(--glass-border); padding: 2rem; border-radius: 20px; backdrop-filter: blur(10px);">
+                    <div style="font-size: 3rem; font-weight: bold; color: var(--tiktok-violet);">100%</div>
+                    <div style="margin-top: 0.5rem; opacity: 0.8;">Lösungsorientiert</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Creators Section -->
+    <section id="creators">
+        <h2 class="section-title gradient-text">Unsere Top Creator*innen</h2>
+        <div class="creators-grid">
+            <div class="creator-card">
+                <div class="creator-avatar">MM</div>
+                <h3 class="creator-name">Max Mustermann</h3>
+                <p style="text-align: center; opacity: 0.8; margin: 1rem 0;">
+                    Lifestyle & Fashion Creator mit Fokus auf nachhaltige Mode und urbanen Style.
+                </p>
+                <div class="creator-stats">
+                    <div class="stat">
+                        <div class="stat-value">2.5M</div>
+                        <div class="stat-label">Follower</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">45M</div>
+                        <div class="stat-label">Likes</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">8.2%</div>
+                        <div class="stat-label">Engagement</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="creator-card">
+                <div class="creator-avatar" style="animation-delay: -2s;">SJ</div>
+                <h3 class="creator-name">Sarah Johnson</h3>
+                <p style="text-align: center; opacity: 0.8; margin: 1rem 0;">
+                    Beauty & Skincare Expertin mit authentischen Produktreviews und Tutorials.
+                </p>
+                <div class="creator-stats">
+                    <div class="stat">
+                        <div class="stat-value">1.8M</div>
+                        <div class="stat-label">Follower</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">32M</div>
+                        <div class="stat-label">Likes</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">7.5%</div>
+                        <div class="stat-label">Engagement</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="creator-card">
+                <div class="creator-avatar" style="animation-delay: -4s;">TK</div>
+                <h3 class="creator-name">Tom Klein</h3>
+                <p style="text-align: center; opacity: 0.8; margin: 1rem 0;">
+                    Tech-Creator mit Reviews zu den neuesten Gadgets und Digital Lifestyle Content.
+                </p>
+                <div class="creator-stats">
+                    <div class="stat">
+                        <div class="stat-value">3.2M</div>
+                        <div class="stat-label">Follower</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">58M</div>
+                        <div class="stat-label">Likes</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">9.1%</div>
+<div class="stat-label">Engagement</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Live Agency Section -->
+    <section id="live-agency">
+        <h2 class="section-title gradient-text">Die innovativste LIVE-Agentur der D/A/CH Region</h2>
+        <p style="text-align: center; font-size: 1.2rem; margin: -1rem 0 3rem; opacity: 0.9;">
+            T4M wurde gegründet, um deine LIVE-Erfahrung zu optimieren
+        </p>
+        <div class="services-container">
+            <div class="service-card">
+                <div class="service-icon">🎯</div>
+                <h3 class="service-title">24/7 Support & Begleitung</h3>
+                <p class="service-description">
+                    Unser Support-Team steht dir bei jeglichen Anliegen zur Seite – seien es Sperrungen, 
+                    Einschränkungen oder die Sicherstellung deines Erfolgs sowie die Suche nach potenziellen Sponsoren.
+                </p>
+                <ul class="service-features">
+                    <li>Direkter Draht zu TikTok</li>
+                    <li>Lösung bei Sperren und Banns</li>
+                    <li>Kontinuierliches Feedback</li>
+                    <li>Persönliche Betreuung</li>
+                </ul>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">🚀</div>
+                <h3 class="service-title">Wachstum & Skalierung</h3>
+                <p class="service-description">
+                    Wir möchten nicht nur deinen Livestream sicherer gestalten, sondern mit dir gemeinsam 
+                    an deinen Aufgaben wachsen. Wir begleiten und skalieren dich ganz nach oben.
+                </p>
+                <ul class="service-features">
+                    <li>Maßgeschneiderte Roadmap</li>
+                    <li>Analyse deiner Möglichkeiten</li>
+                    <li>Profit-Optimierung</li>
+                    <li>Strategische Entwicklung</li>
+                </ul>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">📚</div>
+                <h3 class="service-title">Akademie & Fortbildung</h3>
+                <p class="service-description">
+                    Profitiere von unserem umfangreichen Schulungsprogramm. Von den Besten der Besten lernen 
+                    und kontinuierlich weiterentwickeln.
+                </p>
+                <ul class="service-features">
+                    <li>LIVE-Fähigkeiten Training</li>
+                    <li>Content-Workshops</li>
+                    <li>Hochkarätige Dozenten</li>
+                    <li>Exklusive Creator-Events</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Shop Agency Section -->
+    <section id="shop-agency">
+        <h2 class="section-title gradient-text">Shop·Agentur & Rewards</h2>
+        <div class="services-container">
+            <div class="service-card">
+                <div class="service-icon">🛍️</div>
+                <h3 class="service-title">TikTok Shop Excellence</h3>
+                <p class="service-description">
+                    Wir bedienen Creator UND Seller! Profitiere von unserem Netzwerk aus Top-Shop-Creator*innen 
+                    und unserem direkten Draht zu TikTok.
+                </p>
+                <ul class="service-features">
+                    <li>Shop-Setup & Optimierung</li>
+                    <li>Affiliate-Marketing Kampagnen</li>
+                    <li>Kommerzielle Chancen</li>
+                    <li>Performance Tracking</li>
+                </ul>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">💎</div>
+                <h3 class="service-title">Rewards & Benefits</h3>
+                <p class="service-description">
+                    Verdiene zusätzliche Einnahmen durch unser umfangreiches Rewardsystem und profitiere 
+                    von exklusiven Vorteilen als Teil der trend4media Familie.
+                </p>
+                <ul class="service-features">
+                    <li>Umfangreiches Rewardsystem</li>
+                    <li>Exklusive Creator-Events</li>
+                    <li>Premium Design-Support</li>
+                    <li>Netzwerk-Zugang</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Login Section -->
+    <section id="login" class="login-section">
+        <h2 class="section-title gradient-text">Creator Backstage</h2>
+        <div class="login-card">
+            <h3 style="font-size: 1.5rem; margin-bottom: 2rem;">Login für Creator*innen</h3>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="email">E-Mail Adresse</label>
+                    <input type="email" id="email" name="email" required placeholder="deine@email.com">
+                </div>
+                <div class="form-group">
+                    <label for="password">Passwort</label>
+                    <input type="password" id="password" name="password" required placeholder="••••••••">
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">
+                    Zum Dashboard
+                </button>
+            </form>
+            <p style="margin-top: 2rem; opacity: 0.7; font-size: 0.9rem;">
+                Noch kein Zugang? <a href="#contact" style="color: var(--tiktok-cyan); text-decoration: none;">Jetzt bewerben</a>
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="logo" style="font-size: 2.5rem; margin-bottom: 1rem; justify-content: center;">
+                <span class="logo-trend">trend</span><span class="logo-4">4</span><span class="logo-media">media</span>
+            </div>
+            <p style="opacity: 0.8; margin-bottom: 2rem;">
+                Deine Partner-Agentur für TikTok Creator & Shops
+            </p>
+            <div class="social-links">
+                <a href="#" aria-label="TikTok">📱</a>
+                <a href="#" aria-label="Instagram">📷</a>
+                <a href="#" aria-label="LinkedIn">💼</a>
+                <a href="#" aria-label="Email">✉️</a>
+            </div>
+            <p style="opacity: 0.5; font-size: 0.9rem; margin-top: 3rem;">
+                © 2024 trend4media. Alle Rechte vorbehalten. | 
+                <a href="#" style="color: inherit; text-decoration: none;">Impressum</a> | 
+                <a href="#" style="color: inherit; text-decoration: none;">Datenschutz</a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Remove loading screen
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.querySelector('.loading-screen').style.display = 'none';
+            }, 2500);
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Parallax effect
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallaxElements = document.querySelectorAll('.parallax-element');
+            
+            parallaxElements.forEach(element => {
+                const speed = element.classList.contains('circle-1') ? 0.5 : 0.3;
+                element.style.transform = `translateY(${scrolled * speed}px)`;
+            });
+        });
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections and cards
+        document.querySelectorAll('section, .creator-card, .service-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease';
+            observer.observe(el);
+        });
+
+        // Form submission handler
+        document.getElementById('loginForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            // Add loading state to button
+            const btn = e.target.querySelector('button');
+            const originalText = btn.textContent;
+            btn.textContent = 'Wird geladen...';
+            btn.disabled = true;
+            
+            // Simulate login process
+            setTimeout(() => {
+                alert('Dashboard-Zugang wird vorbereitet...\n\nHinweis: Dies ist eine Demo-Version.');
+                btn.textContent = originalText;
+                btn.disabled = false;
+                document.getElementById('loginForm').reset();
+            }, 1500);
+        });
+
+        // Dynamic counter animation
+        const animateCounter = (element, target, duration = 2000) => {
+            const start = 0;
+            const increment = target / (duration / 16);
+            let current = start;
+            
+            const updateCounter = () => {
+                current += increment;
+                if (current < target) {
+                    element.textContent = Math.floor(current).toLocaleString();
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    element.textContent = target.toLocaleString();
+                }
+            };
+            
+            updateCounter();
+        };
+
+        // Trigger counter animations when stats come into view
+        const statObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !entry.target.dataset.animated) {
+                    entry.target.dataset.animated = 'true';
+                    const value = entry.target.textContent;
+                    if (value.includes('M')) {
+                        const num = parseFloat(value) * 1000000;
+                        animateCounter(entry.target, num);
+                        setTimeout(() => {
+                            entry.target.textContent = value;
+                        }, 2000);
+                    }
+                }
+            });
+        }, { threshold: 0.5 });
+
+        document.querySelectorAll('.stat-value').forEach(stat => {
+            statObserver.observe(stat);
+        });
+
+        // Mouse move effect for hero section
+        document.querySelector('.hero').addEventListener('mousemove', (e) => {
+            const { clientX, clientY } = e;
+            const x = (clientX / window.innerWidth - 0.5) * 20;
+            const y = (clientY / window.innerHeight - 0.5) * 20;
+            
+            document.querySelector('.hero-bg').style.transform = `translate(${x}px, ${y}px)`;
+        });
+
+        // Add glow effect on hover for buttons
+        document.querySelectorAll('.btn').forEach(button => {
+            button.addEventListener('mouseenter', function(e) {
+                const rect = this.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const ripple = document.createElement('div');
+                ripple.style.position = 'absolute';
+                ripple.style.width = '100px';
+                ripple.style.height = '100px';
+                ripple.style.borderRadius = '50%';
+                ripple.style.background = 'radial-gradient(circle, rgba(255,255,255,0.5), transparent)';
+                ripple.style.left = `${x - 50}px`;
+                ripple.style.top = `${y - 50}px`;
+                ripple.style.pointerEvents = 'none';
+                ripple.style.animation = 'ripple 0.6s ease-out';
+                
+                this.style.position = 'relative';
+                this.style.overflow = 'hidden';
+                this.appendChild(ripple);
+                
+                setTimeout(() => ripple.remove(), 600);
+            });
+        });
+
+        // Add ripple animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                from {
+                    transform: scale(0);
+                    opacity: 1;
+                }
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Mobile menu toggle (for future implementation)
+        const mobileMenuBtn = document.createElement('div');
+        mobileMenuBtn.innerHTML = '☰';
+        mobileMenuBtn.style.cssText = `
+            display: none;
+            position: fixed;
+            top: 1.5rem;
+            right: 5%;
+            font-size: 2rem;
+            cursor: pointer;
+            z-index: 1001;
+            color: var(--primary-light);
+        `;
+
+        // Show mobile menu button on small screens
+        if (window.innerWidth <= 768) {
+            mobileMenuBtn.style.display = 'block';
+            document.body.appendChild(mobileMenuBtn);
+        }
+
+        window.addEventListener('resize', () => {
+            if (window.innerWidth <= 768) {
+                mobileMenuBtn.style.display = 'block';
+            } else {
+                mobileMenuBtn.style.display = 'none';
+            }
+        });
+
+        console.log('Trend4media Website initialized successfully!');
+    </script>
+</body>
+</html>
+              
