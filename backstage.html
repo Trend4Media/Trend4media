@@ -1,0 +1,420 @@
+    <!-- T4M Backstage Section -->
+    <section id="login" class="login-section">
+        <h2 class="section-title gradient-text">T4M Backstage</h2>
+        <p style="text-align: center; font-size: 1.2rem; margin: -1rem 0 3rem; opacity: 0.9;">
+            Für Creator · Für Mitarbeiter · Für Brands
+        </p>
+        
+        <div class="backstage-container">
+            <!-- User Type Tabs -->
+            <div class="backstage-tabs">
+                <button class="tab-btn active" data-tab="creator">
+                    <span style="margin-right: 0.5rem;">🎭</span>Creator
+                </button>
+                <button class="tab-btn" data-tab="employee">
+                    <span style="margin-right: 0.5rem;">👥</span>Mitarbeiter
+                </button>
+                <button class="tab-btn" data-tab="brand">
+                    <span style="margin-right: 0.5rem;">🏢</span>Brand
+                </button>
+            </div>
+
+            <!-- Creator Tab Content -->
+            <div id="creator-tab" class="tab-content active">
+                <div class="auth-card">
+                    <div class="auth-toggle">
+                        <button class="auth-toggle-btn active" data-form="creator-login">Login</button>
+                        <button class="auth-toggle-btn" data-form="creator-register">Registrieren</button>
+                    </div>
+
+                    <!-- Creator Login Form -->
+                    <form id="creator-login" class="auth-form active">
+                        <div class="form-group">
+                            <label for="creator-email">E-Mail Adresse</label>
+                            <input type="email" id="creator-email" name="email" required placeholder="deine@email.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="creator-password">Passwort</label>
+                            <input type="password" id="creator-password" name="password" required placeholder="••••••••">
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">
+                            Zum Creator Dashboard
+                        </button>
+                        <p style="text-align: center; margin-top: 1rem; font-size: 0.9rem; opacity: 0.7;">
+                            Demo: max@example.com / demo123
+                        </p>
+                    </form>
+
+                    <!-- Creator Register Form -->
+                    <form id="creator-register" class="auth-form">
+                        <div class="form-group">
+                            <label for="creator-name">Vollständiger Name</label>
+                            <input type="text" id="creator-name" name="name" required placeholder="Max Mustermann">
+                        </div>
+                        <div class="form-group tiktok-handle">
+                            <label for="creator-handle">TikTok Handle</label>
+                            <input type="text" id="creator-handle" name="handle" required placeholder="deinhandle">
+                            <div class="verification-badge" id="handle-verification" style="display: none;">
+                                ✓ Handle wird verifiziert
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="creator-reg-email">E-Mail Adresse</label>
+                            <input type="email" id="creator-reg-email" name="email" required placeholder="deine@email.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="creator-category">Hauptkategorie</label>
+                            <select id="creator-category" name="category" required class="form-select">
+                                <option value="">Kategorie wählen</option>
+                                <option value="fashion">Fashion & Lifestyle</option>
+                                <option value="beauty">Beauty & Skincare</option>
+                                <option value="tech">Tech & Gadgets</option>
+                                <option value="food">Food & Cooking</option>
+                                <option value="gaming">Gaming</option>
+                                <option value="dance">Dance & Music</option>
+                                <option value="comedy">Comedy & Entertainment</option>
+                                <option value="fitness">Fitness & Health</option>
+                                <option value="other">Sonstiges</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="creator-followers">Follower-Anzahl (ungefähr)</label>
+                            <select id="creator-followers" name="followers" required class="form-select">
+                                <option value="">Wählen</option>
+                                <option value="0-1k">0 - 1.000</option>
+                                <option value="1k-10k">1.000 - 10.000</option>
+                                <option value="10k-50k">10.000 - 50.000</option>
+                                <option value="50k-100k">50.000 - 100.000</option>
+                                <option value="100k-500k">100.000 - 500.000</option>
+                                <option value="500k-1m">500.000 - 1M</option>
+                                <option value="1m+">1M+</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="creator-reg-password">Passwort</label>
+                            <input type="password" id="creator-reg-password" name="password" required placeholder="••••••••">
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem; background: linear-gradient(135deg, var(--trend4-pink), var(--tiktok-violet));">
+                            🚀 Jetzt als Creator registrieren
+                        </button>
+                        <div style="text-align: center; margin-top: 1rem;">
+                            <hr style="border: none; border-top: 1px solid var(--glass-border); margin: 1rem 0;">
+                            <p style="font-size: 0.9rem; opacity: 0.8; margin-bottom: 1rem;">Oder direkt mit TikTok anmelden:</p>
+                            <button type="button" class="btn" id="tiktok-login-btn" style="background: linear-gradient(135deg, #ff0050, #00f2ea); color: white; border: none; width: 100%;">
+                                📱 Mit TikTok Account registrieren
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Employee Tab Content -->
+            <div id="employee-tab" class="tab-content">
+                <div class="auth-card">
+                    <div class="auth-toggle">
+                        <button class="auth-toggle-btn active" data-form="employee-login">Login</button>
+                        <button class="auth-toggle-btn" data-form="employee-register">Registrieren</button>
+                    </div>
+
+                    <!-- Employee Login Form -->
+                    <form id="employee-login" class="auth-form active">
+                        <div class="form-group">
+                            <label for="employee-email">E-Mail Adresse</label>
+                            <input type="email" id="employee-email" name="email" required placeholder="name@trend4media.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="employee-password">Passwort</label>
+                            <input type="password" id="employee-password" name="password" required placeholder="••••••••">
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">
+                            Zum Mitarbeiter Dashboard
+                        </button>
+                        <p style="text-align: center; margin-top: 1rem; font-size: 0.9rem; opacity: 0.7;">
+                            Demo: sarah@trend4media.com / demo123
+                        </p>
+                    </form>
+
+                    <!-- Employee Register Form -->
+                    <form id="employee-register" class="auth-form">
+                        <div class="form-group">
+                            <label for="employee-name">Vollständiger Name</label>
+                            <input type="text" id="employee-name" name="name" required placeholder="Max Mustermann">
+                        </div>
+                        <div class="form-group">
+                            <label for="employee-reg-email">E-Mail Adresse</label>
+                            <input type="email" id="employee-reg-email" name="email" required placeholder="name@trend4media.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="employee-position">Position</label>
+                            <select id="employee-position" name="position" required class="form-select">
+                                <option value="">Position wählen</option>
+                                <option value="account-manager">Account Manager</option>
+                                <option value="content-creator">Content Creator</option>
+                                <option value="social-media-manager">Social Media Manager</option>
+                                <option value="designer">Designer</option>
+                                <option value="developer">Developer</option>
+                                <option value="marketing">Marketing</option>
+                                <option value="hr">Human Resources</option>
+                                <option value="management">Management</option>
+                                <option value="other">Sonstiges</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="employee-department">Abteilung</label>
+                            <input type="text" id="employee-department" name="department" placeholder="z.B. Creator Management, Marketing...">
+                        </div>
+                        <div class="form-group">
+                            <label for="employee-reg-password">Passwort</label>
+                            <input type="password" id="employee-reg-password" name="password" required placeholder="••••••••">
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem; background: linear-gradient(135deg, var(--tiktok-violet), var(--tiktok-cyan));">
+                            👥 Als Mitarbeiter registrieren
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Brand Tab Content -->
+            <div id="brand-tab" class="tab-content">
+                <div class="auth-card">
+                    <div class="auth-toggle">
+                        <button class="auth-toggle-btn active" data-form="brand-login">Login</button>
+                        <button class="auth-toggle-btn" data-form="brand-register">Registrieren</button>
+                    </div>
+
+                    <!-- Brand Login Form -->
+                    <form id="brand-login" class="auth-form active">
+                        <div class="form-group">
+                            <label for="brand-email">E-Mail Adresse</label>
+                            <input type="email" id="brand-email" name="email" required placeholder="contact@yourcompany.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="brand-password">Passwort</label>
+                            <input type="password" id="brand-password" name="password" required placeholder="••••••••">
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">
+                            Zum Brand Dashboard
+                        </button>
+                        <p style="text-align: center; margin-top: 1rem; font-size: 0.9rem; opacity: 0.7;">
+                            Demo: marketing@nike.de / demo123
+                        </p>
+                    </form>
+
+                    <!-- Brand Register Form -->
+                    <form id="brand-register" class="auth-form">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                            <div class="form-group">
+                                <label for="brand-name">Markenname / Unternehmen</label>
+                                <input type="text" id="brand-name" name="brandName" required placeholder="Ihr Unternehmen">
+                            </div>
+                            <div class="form-group">
+                                <label for="brand-contact-name">Ansprechpartner</label>
+                                <input type="text" id="brand-contact-name" name="contactName" required placeholder="Max Mustermann">
+                            </div>
+                        </div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                            <div class="form-group">
+                                <label for="brand-reg-email">E-Mail Adresse</label>
+                                <input type="email" id="brand-reg-email" name="email" required placeholder="contact@yourcompany.com">
+                            </div>
+                            <div class="form-group">
+                                <label for="brand-website">Website (optional)</label>
+                                <input type="url" id="brand-website" name="website" placeholder="https://yourcompany.com">
+                            </div>
+                        </div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                            <div class="form-group">
+                                <label for="brand-industry">Branche</label>
+                                <select id="brand-industry" name="industry" required class="form-select">
+                                    <option value="">Branche wählen</option>
+                                    <option value="fashion">Fashion & Mode</option>
+                                    <option value="beauty">Beauty & Kosmetik</option>
+                                    <option value="tech">Technologie</option>
+                                    <option value="food">Food & Beverage</option>
+                                    <option value="health">Gesundheit & Fitness</option>
+                                    <option value="automotive">Automotive</option>
+                                    <option value="finance">Finanzdienstleistungen</option>
+                                    <option value="travel">Reise & Tourismus</option>
+                                    <option value="entertainment">Entertainment</option>
+                                    <option value="other">Sonstiges</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="brand-budget">Budget pro Kampagne</label>
+                                <select id="brand-budget" name="budget" class="form-select">
+                                    <option value="">Budget-Range (optional)</option>
+                                    <option value="0-1k">€0 - €1.000</option>
+                                    <option value="1k-5k">€1.000 - €5.000</option>
+                                    <option value="5k-10k">€5.000 - €10.000</option>
+                                    <option value="10k-25k">€10.000 - €25.000</option>
+                                    <option value="25k-50k">€25.000 - €50.000</option>
+                                    <option value="50k+">€50.000+</option>
+                                    <option value="discuss">Individuell besprechen</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="brand-collaboration">Gewünschte Zusammenarbeit</label>
+                            <select id="brand-collaboration" name="collaboration" required class="form-select">
+                                <option value="">Art der Zusammenarbeit wählen</option>
+                                <option value="sponsored-content">Sponsored Content</option>
+                                <option value="product-placement">Product Placement</option>
+                                <option value="brand-ambassador">Brand Ambassador</option>
+                                <option value="live-shopping">Live Shopping</option>
+                                <option value="tiktok-shop">TikTok Shop Integration</option>
+                                <option value="event-promotion">Event Promotion</option>
+                                <option value="long-term-partnership">Langfristige Partnerschaft</option>
+                                <option value="other">Sonstiges</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="brand-message">Nachricht / Zusätzliche Informationen</label>
+                            <textarea id="brand-message" name="message" rows="3" placeholder="Beschreiben Sie Ihre Ziele und Vorstellungen..." class="form-textarea"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="brand-reg-password">Passwort</label>
+                            <input type="password" id="brand-reg-password" name="password" required placeholder="••••••••">
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem; background: linear-gradient(135deg, var(--trend4-pink), var(--tiktok-red));">
+                            🏢 Als Brand registrieren
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Multi-Dashboard Preview -->
+            <div id="multi-dashboard-preview" style="display: none; margin-top: 2rem;">
+                <!-- Creator Dashboard -->
+                <div id="creator-dashboard" class="dashboard-preview" style="display: none;">
+                    <div class="dashboard-header">
+                        <h4>Creator Dashboard</h4>
+                        <span style="color: var(--tiktok-cyan); font-size: 0.9rem;" id="creator-status">Verifiziert ✓</span>
+                    </div>
+                    <div class="dashboard-stats">
+                        <div class="dashboard-stat">
+                            <div style="font-size: 1.5rem; font-weight: bold; color: var(--tiktok-cyan);" id="creator-followers-stat">245K</div>
+                            <div style="font-size: 0.9rem; opacity: 0.8;">Follower</div>
+                        </div>
+                        <div class="dashboard-stat">
+                            <div style="font-size: 1.5rem; font-weight: bold; color: var(--tiktok-violet);" id="creator-earnings-stat">€35K</div>
+                            <div style="font-size: 0.9rem; opacity: 0.8;">Monatsumsatz</div>
+                        </div>
+                        <div class="dashboard-stat">
+                            <div style="font-size: 1.5rem; font-weight: bold; color: var(--trend4-pink);" id="creator-engagement-stat">8.5%</div>
+                            <div style="font-size: 0.9rem; opacity: 0.8;">Engagement</div>
+                        </div>
+                    </div>
+                    <div class="dashboard-tools">
+                        <div class="dashboard-tool">
+                            <div class="tool-icon">📊</div>
+                            <div class="tool-name">Analytics</div>
+                            <div style="font-size: 0.85rem; opacity: 0.7;">Performance Tracking</div>
+                        </div>
+                        <div class="dashboard-tool">
+                            <div class="tool-icon">🎨</div>
+                            <div class="tool-name">Brand Kit</div>
+                            <div style="font-size: 0.85rem; opacity: 0.7;">Design Materialien</div>
+                        </div>
+                        <div class="dashboard-tool">
+                            <div class="tool-icon">💰</div>
+                            <div class="tool-name">Earnings</div>
+                            <div style="font-size: 0.85rem; opacity: 0.7;">Umsatz & Auszahlungen</div>
+                        </div>
+                        <div class="dashboard-tool">
+                            <div class="tool-icon">🤝</div>
+                            <div class="tool-name">Partnerships</div>
+                            <div style="font-size: 0.85rem; opacity: 0.7;">Brand Kollaborationen</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Employee Dashboard -->
+                <div id="employee-dashboard" class="dashboard-preview" style="display: none;">
+                    <div class="dashboard-header">
+                        <h4>Mitarbeiter Dashboard</h4>
+                        <span style="color: var(--tiktok-violet); font-size: 0.9rem;" id="employee-status">Online</span>
+                    </div>
+                    <div class="dashboard-stats">
+                        <div class="dashboard-stat">
+                            <div style="font-size: 1.5rem; font-weight: bold; color: var(--tiktok-cyan);" id="employee-creators-stat">15</div>
+                            <div style="font-size: 0.9rem; opacity: 0.8;">Betreute Creator</div>
+                        </div>
+                        <div class="dashboard-stat">
+                            <div style="font-size: 1.5rem; font-weight: bold; color: var(--tiktok-violet);" id="employee-campaigns-stat">8</div>
+                            <div style="font-size: 0.9rem; opacity: 0.8;">Aktive Kampagnen</div>
+                        </div>
+                        <div class="dashboard-stat">
+                            <div style="font-size: 1.5rem; font-weight: bold; color: var(--trend4-pink);" id="employee-revenue-stat">€125K</div>
+                            <div style="font-size: 0.9rem; opacity: 0.8;">Monatsumsatz</div>
+                        </div>
+                    </div>
+                    <div class="dashboard-tools">
+                        <div class="dashboard-tool">
+                            <div class="tool-icon">👥</div>
+                            <div class="tool-name">Creator Management</div>
+                            <div style="font-size: 0.85rem; opacity: 0.7;">Betreuung & Support</div>
+                        </div>
+                        <div class="dashboard-tool">
+                            <div class="tool-icon">📋</div>
+                            <div class="tool-name">Kampagnen</div>
+                            <div style="font-size: 0.85rem; opacity: 0.7;">Planung & Überwachung</div>
+                        </div>
+                        <div class="dashboard-tool">
+                            <div class="tool-icon">📈</div>
+                            <div class="tool-name">Reports</div>
+                            <div style="font-size: 0.85rem; opacity: 0.7;">Analyse & Reporting</div>
+                        </div>
+                        <div class="dashboard-tool">
+                            <div class="tool-icon">💬</div>
+                            <div class="tool-name">Communication</div>
+                            <div style="font-size: 0.85rem; opacity: 0.7;">Team & Client Chat</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Brand Dashboard -->
+                <div id="brand-dashboard" class="dashboard-preview" style="display: none;">
+                    <div class="dashboard-header">
+                        <h4>Brand Dashboard</h4>
+                        <span style="color: var(--trend4-pink); font-size: 0.9rem;" id="brand-status">Premium Partner</span>
+                    </div>
+                    <div class="dashboard-stats">
+                        <div class="dashboard-stat">
+                            <div style="font-size: 1.5rem; font-weight: bold; color: var(--tiktok-cyan);" id="brand-campaigns-stat">12</div>
+                            <div style="font-size: 0.9rem; opacity: 0.8;">Aktive Kampagnen</div>
+                        </div>
+                        <div class="dashboard-stat">
+                            <div style="font-size: 1.5rem; font-weight: bold; color: var(--tiktok-violet);" id="brand-reach-stat">5.2M</div>
+                            <div style="font-size: 0.9rem; opacity: 0.8;">Gesamtreichweite</div>
+                        </div>
+                        <div class="dashboard-stat">
+                            <div style="font-size: 1.5rem; font-weight: bold; color: var(--trend4-pink);" id="brand-roi-stat">285%</div>
+                            <div style="font-size: 0.9rem; opacity: 0.8;">ROI</div>
+                        </div>
+                    </div>
+                    <div class="dashboard-tools">
+                        <div class="dashboard-tool">
+                            <div class="tool-icon">🎯</div>
+                            <div class="tool-name">Kampagnen</div>
+                            <div style="font-size: 0.85rem; opacity: 0.7;">Erstellen & Verwalten</div>
+                        </div>
+                        <div class="dashboard-tool">
+                            <div class="tool-icon">👨‍🎨</div>
+                            <div class="tool-name">Creator Matching</div>
+                            <div style="font-size: 0.85rem; opacity: 0.7;">Perfekte Creator finden</div>
+                        </div>
+                        <div class="dashboard-tool">
+                            <div class="tool-icon">📊</div>
+                            <div class="tool-name">Analytics</div>
+                            <div style="font-size: 0.85rem; opacity: 0.7;">ROI & Performance</div>
+                        </div>
+                        <div class="dashboard-tool">
+                            <div class="tool-icon">💳</div>
+                            <div class="tool-name">Billing</div>
+                            <div style="font-size: 0.85rem; opacity: 0.7;">Rechnungen & Zahlungen</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>

@@ -633,6 +633,145 @@
             to { transform: translateX(0); }
         }
 
+        /* Backstage Container */
+        .backstage-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Tab System */
+        .backstage-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            padding: 0.5rem;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 1rem 1.5rem;
+            background: transparent;
+            border: none;
+            color: var(--primary-light);
+            font-size: 1rem;
+            font-weight: 500;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, var(--tiktok-cyan), var(--tiktok-violet));
+            color: var(--primary-light);
+            box-shadow: 0 5px 15px rgba(0, 242, 234, 0.3);
+        }
+
+        .tab-btn:hover:not(.active) {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        /* Tab Content */
+        .tab-content {
+            display: none;
+            animation: fadeInUp 0.5s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .auth-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2.5rem;
+            backdrop-filter: blur(20px);
+            margin-bottom: 2rem;
+        }
+
+        .auth-toggle {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .auth-toggle-btn {
+            padding: 0.75rem 2rem;
+            background: transparent;
+            border: 1px solid var(--glass-border);
+            color: var(--primary-light);
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .auth-toggle-btn:first-child {
+            border-radius: 25px 0 0 25px;
+        }
+
+        .auth-toggle-btn:last-child {
+            border-radius: 0 25px 25px 0;
+            border-left: none;
+        }
+
+        .auth-toggle-btn.active {
+            background: linear-gradient(135deg, var(--trend4-pink), var(--tiktok-violet));
+            border-color: var(--trend4-pink);
+        }
+
+        .auth-form {
+            display: none;
+        }
+
+        .auth-form.active {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        /* Special Input Styles */
+        .tiktok-handle {
+            position: relative;
+        }
+
+        .tiktok-handle::before {
+            content: '@';
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--tiktok-cyan);
+            font-weight: bold;
+            z-index: 2;
+        }
+
+        .tiktok-handle input {
+            padding-left: 2.5rem !important;
+        }
+
+        .verification-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(45deg, var(--tiktok-cyan), var(--tiktok-violet));
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-top: 0.5rem;
+        }
+
         /* Dashboard Styles */
         .dashboard-preview {
             background: var(--glass-bg);
@@ -705,6 +844,65 @@
         .tool-name {
             font-weight: 600;
             margin-bottom: 0.5rem;
+        }
+
+        .form-select, .form-textarea {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            border-radius: 10px;
+            color: var(--primary-light);
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+
+        .form-select:focus, .form-textarea:focus {
+            outline: none;
+            border-color: var(--tiktok-cyan);
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 0 20px rgba(0, 242, 234, 0.1);
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        @media (max-width: 768px) {
+            .backstage-container {
+                max-width: 100%;
+                padding: 0 1rem;
+            }
+
+            .backstage-tabs {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .tab-btn {
+                padding: 0.75rem 1rem;
+            }
+
+            .auth-card {
+                padding: 1.5rem;
+            }
+
+            .dashboard-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .dashboard-tools {
+                grid-template-columns: 1fr;
+            }
+
+            div[style*="grid-template-columns: 1fr 1fr"] {
+                display: block !important;
+            }
+
+            div[style*="grid-template-columns: 1fr 1fr"] .form-group {
+                margin-bottom: 1rem;
+            }
         }
 
         .service-card {
@@ -1619,9 +1817,31 @@
 
     <!-- Login Section -->
     <section id="login" class="login-section">
-        <h2 class="section-title gradient-text">Creator Backstage</h2>
-        <div class="login-card">
-            <h3 style="font-size: 1.5rem; margin-bottom: 2rem;">Login für Creator*innen</h3>
+        <h2 class="section-title gradient-text">T4M Backstage</h2>
+        <p style="text-align: center; font-size: 1.2rem; margin: -1rem 0 3rem; opacity: 0.9;">
+            Für Creator · Für Mitarbeiter · Für Brands
+        </p>
+        <div class="backstage-container">
+            <!-- User Type Tabs -->
+            <div class="backstage-tabs">
+                <button class="tab-btn active" data-tab="creator">
+                    <span style="margin-right: 0.5rem;">🎭</span>Creator
+                </button>
+                <button class="tab-btn" data-tab="employee">
+                    <span style="margin-right: 0.5rem;">👥</span>Mitarbeiter
+                </button>
+                <button class="tab-btn" data-tab="brand">
+                    <span style="margin-right: 0.5rem;">🏢</span>Brand
+                </button>
+            </div>
+
+            <!-- Creator Tab Content -->
+            <div id="creator-tab" class="tab-content active">
+                <div class="auth-card">
+                    <div class="auth-toggle">
+                        <button class="auth-toggle-btn active" data-form="creator-login">Login</button>
+                        <button class="auth-toggle-btn" data-form="creator-register">Registrieren</button>
+                    </div>
             <form id="loginForm">
                 <div class="form-group">
                     <label for="email">E-Mail Adresse</label>
@@ -1711,7 +1931,11 @@
     </footer>
 
     <!-- JavaScript -->
+    <script src="backend.js"></script>
     <script>
+        // Initialize Backend
+        const backend = new T4MBackend();
+
         // Remove loading screen
         window.addEventListener('load', () => {
             setTimeout(() => {
@@ -2001,6 +2225,203 @@
                 closeMobileMenu();
             }
         });
+
+        // T4M Backstage System
+        function initBackstageSystem() {
+            // Tab switching functionality
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Remove active from all tabs and content
+                    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                    
+                    // Add active to clicked tab and corresponding content
+                    btn.classList.add('active');
+                    document.getElementById(btn.dataset.tab + '-tab').classList.add('active');
+                });
+            });
+
+            // Auth toggle functionality (Login/Register)
+            document.querySelectorAll('.auth-toggle-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const formContainer = btn.closest('.auth-card');
+                    const toggleBtns = formContainer.querySelectorAll('.auth-toggle-btn');
+                    const forms = formContainer.querySelectorAll('.auth-form');
+                    
+                    // Remove active from all toggle buttons and forms
+                    toggleBtns.forEach(b => b.classList.remove('active'));
+                    forms.forEach(f => f.classList.remove('active'));
+                    
+                    // Add active to clicked button
+                    btn.classList.add('active');
+                    
+                    // Show corresponding form
+                    const targetForm = document.getElementById(btn.dataset.form);
+                    if (targetForm) {
+                        targetForm.classList.add('active');
+                    }
+                });
+            });
+
+            // TikTok Handle Verification
+            const handleInput = document.getElementById('creator-handle');
+            const verificationBadge = document.getElementById('handle-verification');
+            let verificationTimeout;
+
+            if (handleInput && verificationBadge) {
+                handleInput.addEventListener('input', (e) => {
+                    clearTimeout(verificationTimeout);
+                    verificationBadge.style.display = 'none';
+                    
+                    if (e.target.value.length > 2) {
+                        verificationTimeout = setTimeout(async () => {
+                            verificationBadge.style.display = 'block';
+                            verificationBadge.innerHTML = '⏳ Verifiziere Handle...';
+                            
+                            try {
+                                const result = await backend.verifyTikTokHandle(e.target.value);
+                                verificationBadge.innerHTML = `✓ Verifiziert - ${result.followers} Follower`;
+                                verificationBadge.style.background = 'linear-gradient(45deg, var(--tiktok-cyan), var(--tiktok-violet))';
+                            } catch (error) {
+                                verificationBadge.innerHTML = '❌ ' + error.message;
+                                verificationBadge.style.background = 'linear-gradient(45deg, #ff4757, #ff6b7a)';
+                            }
+                        }, 1000);
+                    }
+                });
+            }
+
+            // TikTok Login Button
+            const tiktokLoginBtn = document.getElementById('tiktok-login-btn');
+            if (tiktokLoginBtn) {
+                tiktokLoginBtn.addEventListener('click', async () => {
+                    const originalText = tiktokLoginBtn.textContent;
+                    tiktokLoginBtn.textContent = '📱 Verbinde mit TikTok...';
+                    tiktokLoginBtn.disabled = true;
+                    
+                    try {
+                        const tiktokData = await TikTokAPI.authenticateUser();
+                        
+                        // Auto-fill form with TikTok data
+                        document.getElementById('creator-handle').value = tiktokData.handle;
+                        document.getElementById('creator-name').value = 'TikTok User ' + tiktokData.handle;
+                        
+                        // Show verification
+                        verificationBadge.style.display = 'block';
+                        verificationBadge.innerHTML = `✓ TikTok verifiziert - ${tiktokData.followers} Follower`;
+                        verificationBadge.style.background = 'linear-gradient(45deg, var(--tiktok-cyan), var(--tiktok-violet))';
+                        
+                        alert('✅ TikTok Account erfolgreich verbunden!\nFormular wurde automatisch ausgefüllt.');
+                    } catch (error) {
+                        alert('❌ TikTok Verbindung fehlgeschlagen: ' + error.message);
+                    } finally {
+                        tiktokLoginBtn.textContent = originalText;
+                        tiktokLoginBtn.disabled = false;
+                    }
+                });
+            }
+
+            // Form submission handlers
+            setupFormHandler('creator-login', 'creator');
+            setupFormHandler('creator-register', 'creator', true);
+            setupFormHandler('employee-login', 'employee');
+            setupFormHandler('employee-register', 'employee', true);
+            setupFormHandler('brand-login', 'brand');
+            setupFormHandler('brand-register', 'brand', true);
+        }
+
+        function setupFormHandler(formId, userType, isRegistration = false) {
+            const form = document.getElementById(formId);
+            if (!form) return;
+
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const formData = new FormData(form);
+                const data = Object.fromEntries(formData.entries());
+                data.type = userType;
+
+                const submitBtn = form.querySelector('button[type="submit"]');
+                const originalText = submitBtn.textContent;
+                
+                try {
+                    submitBtn.disabled = true;
+                    submitBtn.textContent = isRegistration ? '⏳ Registriere...' : '⏳ Logge ein...';
+
+                    let result;
+                    if (isRegistration) {
+                        result = backend.registerUser(data);
+                    } else {
+                        result = backend.loginUser(data.email, data.password, userType);
+                    }
+
+                    // Show success message
+                    alert('✅ ' + result.message);
+
+                    if (!isRegistration || userType !== 'creator') {
+                        // Show appropriate dashboard
+                        showDashboard(userType, result.user);
+                        form.reset();
+                    } else {
+                        // For creator registration, reset form but don't show dashboard
+                        form.reset();
+                    }
+
+                } catch (error) {
+                    alert('❌ ' + error.message);
+                } finally {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = originalText;
+                }
+            });
+        }
+
+        function showDashboard(userType, user) {
+            const dashboardContainer = document.getElementById('multi-dashboard-preview');
+            const specificDashboard = document.getElementById(userType + '-dashboard');
+            
+            if (dashboardContainer && specificDashboard) {
+                // Hide all dashboards
+                document.querySelectorAll('.dashboard-preview').forEach(d => d.style.display = 'none');
+                
+                // Show container and specific dashboard
+                dashboardContainer.style.display = 'block';
+                specificDashboard.style.display = 'block';
+                specificDashboard.classList.add('show');
+                
+                // Update dashboard with user data
+                const dashboardData = backend.getDashboardData(userType, user.id);
+                updateDashboardUI(userType, dashboardData);
+                
+                // Scroll to dashboard
+                dashboardContainer.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        function updateDashboardUI(userType, data) {
+            // Update user-specific dashboard elements
+            switch (userType) {
+                case 'creator':
+                    document.getElementById('creator-followers-stat').textContent = data.stats.followers;
+                    document.getElementById('creator-earnings-stat').textContent = '€' + (data.stats.monthlyEarnings / 1000).toFixed(0) + 'K';
+                    document.getElementById('creator-engagement-stat').textContent = data.stats.engagementRate + '%';
+                    break;
+                    
+                case 'employee':
+                    document.getElementById('employee-creators-stat').textContent = data.stats.managedCreators;
+                    document.getElementById('employee-campaigns-stat').textContent = data.stats.activeCampaigns;
+                    document.getElementById('employee-revenue-stat').textContent = '€' + (data.stats.monthlyRevenue / 1000).toFixed(0) + 'K';
+                    break;
+                    
+                case 'brand':
+                    document.getElementById('brand-campaigns-stat').textContent = data.stats.activeCampaigns;
+                    document.getElementById('brand-reach-stat').textContent = (data.stats.totalReach / 1000000).toFixed(1) + 'M';
+                    document.getElementById('brand-roi-stat').textContent = data.stats.roi + '%';
+                    break;
+            }
+        }
+
+        // Initialize backstage system when DOM is loaded
+        document.addEventListener('DOMContentLoaded', initBackstageSystem);
 
         console.log('Trend4media Website initialized successfully!');
     </script>
