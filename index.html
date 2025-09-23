@@ -278,9 +278,31 @@
         /* Creator Section */
         .creators-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 2rem;
             margin-top: 3rem;
+        }
+
+        .creators-carousel {
+            position: relative;
+            overflow: hidden;
+            margin-top: 3rem;
+        }
+
+        .creators-scroll {
+            display: flex;
+            gap: 2rem;
+            padding: 1rem 0;
+            animation: scroll-creators 30s linear infinite;
+        }
+
+        .creators-scroll:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes scroll-creators {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
         }
 
         .creator-card {
@@ -292,6 +314,24 @@
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
             overflow: hidden;
+            min-width: 320px;
+        }
+
+        .creator-card-highlight {
+            border: 2px solid var(--trend4-pink);
+            background: linear-gradient(135deg, rgba(236, 11, 122, 0.05), var(--glass-bg));
+        }
+
+        .creator-category {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            padding: 0.25rem 0.75rem;
+            background: linear-gradient(45deg, var(--tiktok-cyan), var(--tiktok-violet));
+            border-radius: 15px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
         }
 
         .creator-card::before {
@@ -377,6 +417,294 @@
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 3rem;
             margin-top: 4rem;
+        }
+
+        /* Timeline Styles */
+        .timeline {
+            position: relative;
+            max-width: 1000px;
+            margin: 4rem auto;
+            padding: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--tiktok-cyan), var(--tiktok-violet), var(--trend4-pink));
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            position: relative;
+            width: 45%;
+            margin: 3rem 0;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.6s ease;
+        }
+
+        .timeline-item.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 55%;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            background: linear-gradient(45deg, var(--tiktok-cyan), var(--tiktok-violet));
+            border-radius: 50%;
+            top: 20px;
+            z-index: 2;
+        }
+
+        .timeline-item:nth-child(odd)::before {
+            right: -37px;
+        }
+
+        .timeline-item:nth-child(even)::before {
+            left: -37px;
+        }
+
+        .timeline-content {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+            position: relative;
+        }
+
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            top: 25px;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content::before {
+            right: -10px;
+            border-color: transparent transparent transparent var(--glass-border);
+            border-width: 10px 0 10px 10px;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content::before {
+            left: -10px;
+            border-color: transparent var(--glass-border) transparent transparent;
+            border-width: 10px 10px 10px 0;
+        }
+
+        .timeline-year {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--tiktok-cyan);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .timeline::before {
+                left: 20px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                left: 0 !important;
+                padding-left: 60px;
+            }
+            
+            .timeline-item::before {
+                left: 7px !important;
+            }
+            
+            .timeline-content::before {
+                left: -10px !important;
+                border-color: transparent var(--glass-border) transparent transparent !important;
+                border-width: 10px 10px 10px 0 !important;
+            }
+        }
+
+        /* Animated Charts */
+        .chart-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+
+        .chart-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chart-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .chart-value {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin: 1rem 0;
+            background: linear-gradient(135deg, var(--tiktok-cyan), var(--tiktok-violet));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .chart-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 1rem;
+        }
+
+        .progress-ring {
+            transform: rotate(-90deg);
+            margin: 1rem auto;
+        }
+
+        .progress-ring-circle {
+            stroke: var(--glass-border);
+            fill: transparent;
+            stroke-width: 8;
+        }
+
+        .progress-ring-fill {
+            stroke: url(#gradient);
+            fill: transparent;
+            stroke-width: 8;
+            stroke-linecap: round;
+            stroke-dasharray: 283;
+            stroke-dashoffset: 283;
+            transition: stroke-dashoffset 2s ease;
+        }
+
+        .growth-visualization {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+            height: 120px;
+            margin: 2rem 0;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 15px;
+        }
+
+        .growth-bar {
+            width: 25px;
+            background: linear-gradient(180deg, var(--tiktok-cyan), var(--tiktok-violet));
+            border-radius: 12px 12px 0 0;
+            transition: height 2s ease;
+            animation: grow-up 2s ease forwards;
+        }
+
+        @keyframes grow-up {
+            from { height: 0; }
+        }
+
+        .growth-bar:nth-child(1) { height: 40%; animation-delay: 0.2s; }
+        .growth-bar:nth-child(2) { height: 65%; animation-delay: 0.4s; }
+        .growth-bar:nth-child(3) { height: 85%; animation-delay: 0.6s; }
+        .growth-bar:nth-child(4) { height: 100%; animation-delay: 0.8s; }
+        .growth-bar:nth-child(5) { height: 75%; animation-delay: 1s; }
+
+        @keyframes fillBar {
+            to { transform: translateX(0); }
+        }
+
+        /* Dashboard Styles */
+        .dashboard-preview {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+            margin-top: 2rem;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .dashboard-preview.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .dashboard-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .dashboard-stat {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--glass-border);
+            border-radius: 10px;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .dashboard-tools {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .dashboard-tool {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--glass-border);
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .dashboard-tool:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--tiktok-cyan);
+            transform: translateY(-2px);
+        }
+
+        .tool-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .tool-name {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
         }
 
         .service-card {
@@ -555,6 +883,7 @@
             pointer-events: none;
             opacity: 0.1;
             z-index: -1;
+            transition: transform 0.1s ease-out;
         }
 
         .circle-1 {
@@ -565,6 +894,7 @@
             filter: blur(100px);
             top: 20%;
             left: -150px;
+            animation: float-1 6s ease-in-out infinite;
         }
 
         .circle-2 {
@@ -575,6 +905,34 @@
             filter: blur(120px);
             bottom: 20%;
             right: -200px;
+            animation: float-2 8s ease-in-out infinite;
+        }
+
+        .circle-3 {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            background: var(--trend4-pink);
+            filter: blur(80px);
+            top: 60%;
+            right: 10%;
+            animation: float-3 7s ease-in-out infinite;
+        }
+
+        @keyframes float-1 {
+            0%, 100% { transform: translateY(0px) translateX(0px); }
+            33% { transform: translateY(-20px) translateX(10px); }
+            66% { transform: translateY(10px) translateX(-15px); }
+        }
+
+        @keyframes float-2 {
+            0%, 100% { transform: translateY(0px) translateX(0px) rotate(0deg); }
+            50% { transform: translateY(-30px) translateX(20px) rotate(180deg); }
+        }
+
+        @keyframes float-3 {
+            0%, 100% { transform: translateY(0px) scale(1); }
+            50% { transform: translateY(-25px) scale(1.1); }
         }
 
         /* Scroll Indicator */
@@ -598,10 +956,86 @@
             filter: drop-shadow(0 0 10px rgba(0, 242, 234, 0.5));
         }
 
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--primary-light);
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .mobile-nav {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 80%;
+            max-width: 300px;
+            height: 100vh;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            border-left: 1px solid var(--glass-border);
+            z-index: 1000;
+            transition: right 0.3s ease;
+            padding-top: 5rem;
+        }
+
+        .mobile-nav.open {
+            right: 0;
+        }
+
+        .mobile-nav ul {
+            list-style: none;
+            padding: 2rem;
+        }
+
+        .mobile-nav li {
+            margin-bottom: 1.5rem;
+        }
+
+        .mobile-nav a {
+            color: var(--primary-light);
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: 500;
+            padding: 1rem 0;
+            display: block;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: color 0.3s ease;
+        }
+
+        .mobile-nav a:hover {
+            color: var(--tiktok-cyan);
+        }
+
+        .mobile-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-overlay.open {
+            opacity: 1;
+            visibility: visible;
+        }
+
         /* Mobile Responsive */
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
             }
             
             .hero h1 {
@@ -624,6 +1058,26 @@
             
             .services-container {
                 grid-template-columns: 1fr;
+            }
+
+            .creators-scroll {
+                animation-duration: 40s;
+            }
+
+            .chart-container {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+
+            .dashboard-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .dashboard-tools {
+                grid-template-columns: 1fr;
+            }
+
+            section {
+                padding: 3rem 5%;
             }
         }
 
@@ -673,6 +1127,21 @@
     <!-- Parallax Background Elements -->
     <div class="parallax-element circle-1"></div>
     <div class="parallax-element circle-2"></div>
+    <div class="parallax-element circle-3"></div>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+
+    <!-- Mobile Navigation -->
+    <nav class="mobile-nav" id="mobileNav">
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#creators">Creator*innen</a></li>
+            <li><a href="#live-agency">Live·Agentur</a></li>
+            <li><a href="#shop-agency">Shop·Agentur</a></li>
+            <li><a href="#login">Login</a></li>
+        </ul>
+    </nav>
 
     <!-- Navigation -->
     <nav id="navbar">
@@ -687,6 +1156,7 @@
                 <li><a href="#shop-agency">Shop·Agentur</a></li>
                 <li><a href="#login">Login</a></li>
             </ul>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
         </div>
     </nav>
 
@@ -753,13 +1223,25 @@
     <!-- Creators Section -->
     <section id="creators">
         <h2 class="section-title gradient-text">Unsere Top Creator*innen</h2>
-        <div class="creators-grid">
-            <div class="creator-card">
-                <div class="creator-avatar">MM</div>
+        <p style="text-align: center; font-size: 1.2rem; margin: -1rem 0 3rem; opacity: 0.9;">
+            Lerne die Gesichter hinter den erfolgreichsten TikTok-Kanälen kennen
+        </p>
+        
+        <!-- Featured Creator -->
+        <div class="creators-grid" style="margin-bottom: 4rem;">
+            <div class="creator-card creator-card-highlight">
+                <div class="creator-category">Featured</div>
+                <div class="creator-avatar" style="background: linear-gradient(135deg, var(--trend4-pink), var(--tiktok-violet));">MM</div>
                 <h3 class="creator-name">Max Mustermann</h3>
                 <p style="text-align: center; opacity: 0.8; margin: 1rem 0;">
-                    Lifestyle & Fashion Creator mit Fokus auf nachhaltige Mode und urbanen Style.
+                    Lifestyle & Fashion Creator mit Fokus auf nachhaltige Mode und urbanen Style. 
+                    Spezialisiert auf LIVE-Shopping und Brand-Kollaborationen.
                 </p>
+                <div style="display: flex; gap: 1rem; justify-content: center; margin: 1.5rem 0;">
+                    <span style="background: rgba(0, 242, 234, 0.2); padding: 0.25rem 0.75rem; border-radius: 15px; font-size: 0.85rem;">Fashion</span>
+                    <span style="background: rgba(139, 69, 255, 0.2); padding: 0.25rem 0.75rem; border-radius: 15px; font-size: 0.85rem;">LIVE</span>
+                    <span style="background: rgba(236, 11, 122, 0.2); padding: 0.25rem 0.75rem; border-radius: 15px; font-size: 0.85rem;">Shopping</span>
+                </div>
                 <div class="creator-stats">
                     <div class="stat">
                         <div class="stat-value">2.5M</div>
@@ -775,47 +1257,170 @@
                     </div>
                 </div>
             </div>
-            
-            <div class="creator-card">
-                <div class="creator-avatar" style="animation-delay: -2s;">SJ</div>
-                <h3 class="creator-name">Sarah Johnson</h3>
-                <p style="text-align: center; opacity: 0.8; margin: 1rem 0;">
-                    Beauty & Skincare Expertin mit authentischen Produktreviews und Tutorials.
-                </p>
-                <div class="creator-stats">
-                    <div class="stat">
-                        <div class="stat-value">1.8M</div>
-                        <div class="stat-label">Follower</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-value">32M</div>
-                        <div class="stat-label">Likes</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-value">7.5%</div>
-                        <div class="stat-label">Engagement</div>
+        </div>
+
+        <!-- Creator Carousel -->
+        <div class="creators-carousel">
+            <div class="creators-scroll">
+                <div class="creator-card">
+                    <div class="creator-category">Beauty</div>
+                    <div class="creator-avatar" style="animation-delay: -2s;">SJ</div>
+                    <h3 class="creator-name">Sarah Johnson</h3>
+                    <p style="text-align: center; opacity: 0.8; margin: 1rem 0;">
+                        Beauty & Skincare Expertin mit authentischen Produktreviews und Live-Tutorials.
+                    </p>
+                    <div class="creator-stats">
+                        <div class="stat">
+                            <div class="stat-value">1.8M</div>
+                            <div class="stat-label">Follower</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">32M</div>
+                            <div class="stat-label">Likes</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">7.5%</div>
+                            <div class="stat-label">Engagement</div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            
-            <div class="creator-card">
-                <div class="creator-avatar" style="animation-delay: -4s;">TK</div>
-                <h3 class="creator-name">Tom Klein</h3>
-                <p style="text-align: center; opacity: 0.8; margin: 1rem 0;">
-                    Tech-Creator mit Reviews zu den neuesten Gadgets und Digital Lifestyle Content.
-                </p>
-                <div class="creator-stats">
-                    <div class="stat">
-                        <div class="stat-value">3.2M</div>
-                        <div class="stat-label">Follower</div>
+                
+                <div class="creator-card">
+                    <div class="creator-category">Tech</div>
+                    <div class="creator-avatar" style="animation-delay: -4s;">TK</div>
+                    <h3 class="creator-name">Tom Klein</h3>
+                    <p style="text-align: center; opacity: 0.8; margin: 1rem 0;">
+                        Tech-Creator mit Reviews zu den neuesten Gadgets und Digital Lifestyle Content.
+                    </p>
+                    <div class="creator-stats">
+                        <div class="stat">
+                            <div class="stat-value">3.2M</div>
+                            <div class="stat-label">Follower</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">58M</div>
+                            <div class="stat-label">Likes</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">9.1%</div>
+                            <div class="stat-label">Engagement</div>
+                        </div>
                     </div>
-                    <div class="stat">
-                        <div class="stat-value">58M</div>
-                        <div class="stat-label">Likes</div>
+                </div>
+
+                <div class="creator-card">
+                    <div class="creator-category">Food</div>
+                    <div class="creator-avatar" style="background: linear-gradient(135deg, #ff6b35, #f7931e); animation-delay: -1s;">LM</div>
+                    <h3 class="creator-name">Lisa Müller</h3>
+                    <p style="text-align: center; opacity: 0.8; margin: 1rem 0;">
+                        Food-Creator mit kreativen Rezept-Ideen und Küchen-Hacks für den Alltag.
+                    </p>
+                    <div class="creator-stats">
+                        <div class="stat">
+                            <div class="stat-value">980K</div>
+                            <div class="stat-label">Follower</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">15M</div>
+                            <div class="stat-label">Likes</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">6.8%</div>
+                            <div class="stat-label">Engagement</div>
+                        </div>
                     </div>
-                    <div class="stat">
-                        <div class="stat-value">9.1%</div>
-<div class="stat-label">Engagement</div>
+                </div>
+
+                <div class="creator-card">
+                    <div class="creator-category">Gaming</div>
+                    <div class="creator-avatar" style="background: linear-gradient(135deg, #00d4aa, #00a8ff); animation-delay: -3s;">FW</div>
+                    <h3 class="creator-name">Felix Wagner</h3>
+                    <p style="text-align: center; opacity: 0.8; margin: 1rem 0;">
+                        Gaming-Creator mit Live-Streams und Tutorials zu den beliebtesten Games.
+                    </p>
+                    <div class="creator-stats">
+                        <div class="stat">
+                            <div class="stat-value">1.4M</div>
+                            <div class="stat-label">Follower</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">28M</div>
+                            <div class="stat-label">Likes</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">9.3%</div>
+                            <div class="stat-label">Engagement</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="creator-card">
+                    <div class="creator-category">Dance</div>
+                    <div class="creator-avatar" style="background: linear-gradient(135deg, #ff9ff3, #f368e0); animation-delay: -5s;">AS</div>
+                    <h3 class="creator-name">Anna Schmidt</h3>
+                    <p style="text-align: center; opacity: 0.8; margin: 1rem 0;">
+                        Dance-Creator mit eigenen Choreografien und Trend-Challenges.
+                    </p>
+                    <div class="creator-stats">
+                        <div class="stat">
+                            <div class="stat-value">2.1M</div>
+                            <div class="stat-label">Follower</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">67M</div>
+                            <div class="stat-label">Likes</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">11.2%</div>
+                            <div class="stat-label">Engagement</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Duplicate for seamless loop -->
+                <div class="creator-card">
+                    <div class="creator-category">Beauty</div>
+                    <div class="creator-avatar" style="animation-delay: -2s;">SJ</div>
+                    <h3 class="creator-name">Sarah Johnson</h3>
+                    <p style="text-align: center; opacity: 0.8; margin: 1rem 0;">
+                        Beauty & Skincare Expertin mit authentischen Produktreviews und Live-Tutorials.
+                    </p>
+                    <div class="creator-stats">
+                        <div class="stat">
+                            <div class="stat-value">1.8M</div>
+                            <div class="stat-label">Follower</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">32M</div>
+                            <div class="stat-label">Likes</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">7.5%</div>
+                            <div class="stat-label">Engagement</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="creator-card">
+                    <div class="creator-category">Tech</div>
+                    <div class="creator-avatar" style="animation-delay: -4s;">TK</div>
+                    <h3 class="creator-name">Tom Klein</h3>
+                    <p style="text-align: center; opacity: 0.8; margin: 1rem 0;">
+                        Tech-Creator mit Reviews zu den neuesten Gadgets und Digital Lifestyle Content.
+                    </p>
+                    <div class="creator-stats">
+                        <div class="stat">
+                            <div class="stat-value">3.2M</div>
+                            <div class="stat-label">Follower</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">58M</div>
+                            <div class="stat-label">Likes</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">9.1%</div>
+                            <div class="stat-label">Engagement</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -828,6 +1433,50 @@
         <p style="text-align: center; font-size: 1.2rem; margin: -1rem 0 3rem; opacity: 0.9;">
             T4M wurde gegründet, um deine LIVE-Erfahrung zu optimieren
         </p>
+
+        <!-- Timeline -->
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2020</div>
+                    <div class="timeline-title">Die Vision entsteht</div>
+                    <p>Gründung von Trend4Media mit der Mission, Creator auf TikTok zu unterstützen und zu fördern.</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2021</div>
+                    <div class="timeline-title">Erstes Creator-Netzwerk</div>
+                    <p>Aufbau unseres ersten Creator-Netzwerks mit 50+ talentierten Content-Erstellern.</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2022</div>
+                    <div class="timeline-title">TikTok Partnership</div>
+                    <p>Offizielle Partnerschaft mit TikTok und Aufbau direkter Kommunikationswege.</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2023</div>
+                    <div class="timeline-title">LIVE-Spezialisierung</div>
+                    <p>Fokussierung auf LIVE-Content und Entwicklung spezieller Support-Services.</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2024</div>
+                    <div class="timeline-title">Shop-Integration</div>
+                    <p>Erweiterung um TikTok Shop Services und Creator-Commerce Lösungen.</p>
+                </div>
+            </div>
+        </div>
+
         <div class="services-container">
             <div class="service-card">
                 <div class="service-icon">🎯</div>
@@ -879,6 +1528,62 @@
     <!-- Shop Agency Section -->
     <section id="shop-agency">
         <h2 class="section-title gradient-text">Shop·Agentur & Rewards</h2>
+        <p style="text-align: center; font-size: 1.2rem; margin: -1rem 0 3rem; opacity: 0.9;">
+            Skaliere dein Business mit unseren TikTok Shop Experten
+        </p>
+
+        <!-- Growth Charts -->
+        <div class="chart-container">
+            <div class="chart-card">
+                <div class="chart-icon">🚀</div>
+                <div class="chart-value" data-count="250">0</div>
+                <div class="chart-label">% Umsatzwachstum</div>
+                <div class="growth-visualization">
+                    <div class="growth-bar"></div>
+                    <div class="growth-bar"></div>
+                    <div class="growth-bar"></div>
+                    <div class="growth-bar"></div>
+                    <div class="growth-bar"></div>
+                </div>
+            </div>
+
+            <div class="chart-card">
+                <div class="chart-icon">🛒</div>
+                <div class="chart-value" data-count="500">0</div>
+                <div class="chart-label">+ Aktive Shops</div>
+                <svg class="progress-ring" width="120" height="120">
+                    <defs>
+                        <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" style="stop-color:var(--tiktok-cyan);stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:var(--tiktok-violet);stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <circle class="progress-ring-circle" cx="60" cy="60" r="45"></circle>
+                    <circle class="progress-ring-fill" cx="60" cy="60" r="45" data-progress="85"></circle>
+                </svg>
+            </div>
+
+            <div class="chart-card">
+                <div class="chart-icon">👥</div>
+                <div class="chart-value" data-count="1200">0</div>
+                <div class="chart-label">Creator im Netzwerk</div>
+                <div style="display: flex; gap: 0.5rem; justify-content: center; margin-top: 1rem;">
+                    <div style="width: 15px; height: 15px; border-radius: 50%; background: var(--tiktok-cyan); animation: pulse 2s infinite;"></div>
+                    <div style="width: 15px; height: 15px; border-radius: 50%; background: var(--tiktok-violet); animation: pulse 2s infinite 0.5s;"></div>
+                    <div style="width: 15px; height: 15px; border-radius: 50%; background: var(--trend4-pink); animation: pulse 2s infinite 1s;"></div>
+                </div>
+            </div>
+
+            <div class="chart-card">
+                <div class="chart-icon">💰</div>
+                <div class="chart-value" data-count="95">0</div>
+                <div class="chart-label">% Erfolgsquote</div>
+                <div style="width: 100%; height: 8px; background: rgba(255,255,255,0.1); border-radius: 4px; margin-top: 1rem; overflow: hidden;">
+                    <div style="width: 95%; height: 100%; background: linear-gradient(90deg, var(--tiktok-cyan), var(--tiktok-violet)); border-radius: 4px; animation: fillBar 3s ease forwards; transform: translateX(-100%);"></div>
+                </div>
+            </div>
+        </div>
+
         <div class="services-container">
             <div class="service-card">
                 <div class="service-icon">🛍️</div>
@@ -933,6 +1638,52 @@
             <p style="margin-top: 2rem; opacity: 0.7; font-size: 0.9rem;">
                 Noch kein Zugang? <a href="#contact" style="color: var(--tiktok-cyan); text-decoration: none;">Jetzt bewerben</a>
             </p>
+
+            <!-- Dashboard Preview -->
+            <div class="dashboard-preview" id="dashboardPreview">
+                <div class="dashboard-header">
+                    <h4>Creator Dashboard</h4>
+                    <span style="color: var(--tiktok-cyan); font-size: 0.9rem;">Online</span>
+                </div>
+
+                <div class="dashboard-stats">
+                    <div class="dashboard-stat">
+                        <div style="font-size: 1.5rem; font-weight: bold; color: var(--tiktok-cyan);">2.1M</div>
+                        <div style="font-size: 0.9rem; opacity: 0.8;">Follower</div>
+                    </div>
+                    <div class="dashboard-stat">
+                        <div style="font-size: 1.5rem; font-weight: bold; color: var(--tiktok-violet);">€45K</div>
+                        <div style="font-size: 0.9rem; opacity: 0.8;">Monatsumsatz</div>
+                    </div>
+                    <div class="dashboard-stat">
+                        <div style="font-size: 1.5rem; font-weight: bold; color: var(--trend4-pink);">8.5%</div>
+                        <div style="font-size: 0.9rem; opacity: 0.8;">Engagement</div>
+                    </div>
+                </div>
+
+                <div class="dashboard-tools">
+                    <div class="dashboard-tool">
+                        <div class="tool-icon">📊</div>
+                        <div class="tool-name">Analytics</div>
+                        <div style="font-size: 0.85rem; opacity: 0.7;">Performance Tracking</div>
+                    </div>
+                    <div class="dashboard-tool">
+                        <div class="tool-icon">🎨</div>
+                        <div class="tool-name">Brand Kit</div>
+                        <div style="font-size: 0.85rem; opacity: 0.7;">Design Materialien</div>
+                    </div>
+                    <div class="dashboard-tool">
+                        <div class="tool-icon">💰</div>
+                        <div class="tool-name">Earnings</div>
+                        <div style="font-size: 0.85rem; opacity: 0.7;">Umsatz & Auszahlungen</div>
+                    </div>
+                    <div class="dashboard-tool">
+                        <div class="tool-icon">🤝</div>
+                        <div class="tool-name">Partnerships</div>
+                        <div style="font-size: 0.85rem; opacity: 0.7;">Brand Kollaborationen</div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -1038,12 +1789,22 @@
             btn.textContent = 'Wird geladen...';
             btn.disabled = true;
             
-            // Simulate login process
+            // Simulate login process and show dashboard
             setTimeout(() => {
-                alert('Dashboard-Zugang wird vorbereitet...\n\nHinweis: Dies ist eine Demo-Version.');
-                btn.textContent = originalText;
-                btn.disabled = false;
-                document.getElementById('loginForm').reset();
+                btn.textContent = '✓ Erfolgreich eingeloggt';
+                btn.style.background = 'linear-gradient(135deg, #00d4aa, #00a8ff)';
+                
+                // Show dashboard preview
+                const dashboardPreview = document.getElementById('dashboardPreview');
+                dashboardPreview.classList.add('show');
+                
+                // Reset form
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                    btn.disabled = false;
+                    btn.style.background = '';
+                    document.getElementById('loginForm').reset();
+                }, 5000);
             }, 1500);
         });
 
@@ -1086,6 +1847,77 @@
         document.querySelectorAll('.stat-value').forEach(stat => {
             statObserver.observe(stat);
         });
+
+        // Timeline animation observer
+        const timelineObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                }
+            });
+        }, { threshold: 0.3 });
+
+        document.querySelectorAll('.timeline-item').forEach(item => {
+            timelineObserver.observe(item);
+        });
+
+        // Chart animations observer
+        const chartObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !entry.target.dataset.animated) {
+                    entry.target.dataset.animated = 'true';
+                    
+                    // Animate chart values
+                    const chartValue = entry.target.querySelector('[data-count]');
+                    if (chartValue) {
+                        const targetCount = parseInt(chartValue.dataset.count);
+                        animateCounter(chartValue, targetCount, 2000);
+                    }
+
+                    // Animate progress rings
+                    const progressRing = entry.target.querySelector('.progress-ring-fill');
+                    if (progressRing) {
+                        const progress = parseInt(progressRing.dataset.progress);
+                        const offset = 283 - (283 * progress / 100);
+                        setTimeout(() => {
+                            progressRing.style.strokeDashoffset = offset;
+                        }, 500);
+                    }
+                }
+            });
+        }, { threshold: 0.5 });
+
+        document.querySelectorAll('.chart-card').forEach(chart => {
+            chartObserver.observe(chart);
+        });
+
+        // Enhanced parallax effect
+        let ticking = false;
+        function updateParallax() {
+            const scrolled = window.pageYOffset;
+            const parallaxElements = document.querySelectorAll('.parallax-element');
+            const heroHeight = document.querySelector('.hero').offsetHeight;
+            
+            parallaxElements.forEach((element, index) => {
+                const speed = [0.5, 0.3, 0.7][index] || 0.5;
+                const yPos = -(scrolled * speed);
+                const scale = Math.max(0.8, 1 - (scrolled / heroHeight) * 0.3);
+                
+                element.style.transform = `translateY(${yPos}px) scale(${scale})`;
+                element.style.opacity = Math.max(0.05, 0.1 - (scrolled / heroHeight) * 0.05);
+            });
+
+            ticking = false;
+        }
+
+        function requestTick() {
+            if (!ticking) {
+                requestAnimationFrame(updateParallax);
+                ticking = true;
+            }
+        }
+
+        window.addEventListener('scroll', requestTick);
 
         // Mouse move effect for hero section
         document.querySelector('.hero').addEventListener('mousemove', (e) => {
@@ -1138,31 +1970,35 @@
         `;
         document.head.appendChild(style);
 
-        // Mobile menu toggle (for future implementation)
-        const mobileMenuBtn = document.createElement('div');
-        mobileMenuBtn.innerHTML = '☰';
-        mobileMenuBtn.style.cssText = `
-            display: none;
-            position: fixed;
-            top: 1.5rem;
-            right: 5%;
-            font-size: 2rem;
-            cursor: pointer;
-            z-index: 1001;
-            color: var(--primary-light);
-        `;
+        // Mobile menu functionality
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileNav = document.getElementById('mobileNav');
+        const mobileOverlay = document.getElementById('mobileOverlay');
 
-        // Show mobile menu button on small screens
-        if (window.innerWidth <= 768) {
-            mobileMenuBtn.style.display = 'block';
-            document.body.appendChild(mobileMenuBtn);
+        function toggleMobileMenu() {
+            mobileNav.classList.toggle('open');
+            mobileOverlay.classList.toggle('open');
+            mobileMenuBtn.innerHTML = mobileNav.classList.contains('open') ? '✕' : '☰';
         }
 
+        function closeMobileMenu() {
+            mobileNav.classList.remove('open');
+            mobileOverlay.classList.remove('open');
+            mobileMenuBtn.innerHTML = '☰';
+        }
+
+        mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+        mobileOverlay.addEventListener('click', closeMobileMenu);
+
+        // Close mobile menu when clicking on nav links
+        document.querySelectorAll('.mobile-nav a').forEach(link => {
+            link.addEventListener('click', closeMobileMenu);
+        });
+
+        // Close mobile menu on window resize
         window.addEventListener('resize', () => {
-            if (window.innerWidth <= 768) {
-                mobileMenuBtn.style.display = 'block';
-            } else {
-                mobileMenuBtn.style.display = 'none';
+            if (window.innerWidth > 768) {
+                closeMobileMenu();
             }
         });
 
