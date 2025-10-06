@@ -28,41 +28,43 @@ Die Hauptseite für die Anzeige der Proxima-Daten mit:
 - Automatische Fehlerbehandlung
 
 ### `proxima_data.json`
-Datenbank-Datei im Format:
+Datenbank-Datei im JSON-Objekt-Format (Spacenations API Format):
 ```json
 [
-    ["Planetenname", "Koordinaten", Punktzahl, "Zerstörungsdatum", Wochennummer],
+    {
+        "name": "Proxima 0-1",
+        "coordinates": "555:161:2",
+        "score": 186,
+        "deleteOn": "2025-10-11T11:00:00.000000Z"
+    },
     ...
 ]
 ```
 
-**Beispiel:**
-```json
-[
-    ["Proxima 1-1", "123:456", 850, "2025-10-13T18:45:00Z", 1],
-    ["Proxima 2-1", "111:222", 980, "2025-10-20T18:45:00Z", 2]
-]
-```
+**Hinweis:** Die Wochennummer wird automatisch aus dem Planetennamen extrahiert (z.B. "Proxima 0-1" → Woche 0)
 
 ## 🔄 Daten aktualisieren
 
-### Manuelle Aktualisierung:
-1. Öffnen Sie `proxima_data.json`
-2. Fügen Sie neue Planeten im Array-Format hinzu:
-   ```json
-   ["Name", "Koordinaten", Punkte, "Datum", Woche]
-   ```
-3. Speichern und committen Sie die Änderung
+**Wichtig:** Das System lädt Daten automatisch von der Live-API. Die lokale `proxima_data.json` dient nur als Backup!
 
-### Automatische Aktualisierung (TODO):
-Das System ist vorbereitet für automatische Updates über die Spacenations API:
+### Automatische Aktualisierung:
+✅ **Das System ist jetzt vollständig funktionsfähig!**
 
-**Notiz:** Die offizielle API `https://beta1.game.spacenations.eu/api/proxima` gibt derzeit 404 zurück.
+Die ProximaDB lädt Daten automatisch von der Spacenations API:
+- **Live-API**: `https://beta2.game.spacenations.eu/api/proxima`
+- **Backup**: Lokale `proxima_data.json` Datei
+- **Updates**: Automatisch bei jedem Seitenaufruf
 
-**Mögliche Lösungen:**
-1. Kontaktieren Sie Spacenations für den korrekten API-Endpunkt
-2. Erstellen Sie ein Skript zum automatischen Abrufen der Daten
-3. Verwenden Sie GitHub Actions für wöchentliche Updates
+### Manuelle Backup-Aktualisierung:
+```bash
+# Daten von der API abrufen und speichern
+curl -s "https://beta2.game.spacenations.eu/api/proxima" -o proxima_data.json
+
+# Änderungen committen
+git add proxima_data.json
+git commit -m "Update Proxima-Daten"
+git push
+```
 
 ### Beispiel GitHub Action (proxima-update.yml):
 ```yaml
@@ -93,11 +95,11 @@ jobs:
 ## 🎯 Datenformat Details
 
 ### Feld-Beschreibungen:
-1. **Name** (String): Planet-Name z.B. "Proxima 1-1"
-2. **Koordinaten** (String): Galaktische Koordinaten z.B. "123:456"
-3. **Punkte** (Number): Punktzahl des Planeten
-4. **Zerstörungsdatum** (String): ISO 8601 Datum z.B. "2025-10-13T18:45:00Z"
-5. **Wochennummer** (Number): Spielwoche z.B. 1, 2, 3
+1. **name** (String): Planet-Name z.B. "Proxima 0-1"
+2. **coordinates** (String): Galaktische Koordinaten z.B. "555:161:2"
+3. **score** (Number): Punktzahl des Planeten
+4. **deleteOn** (String): ISO 8601 Datum z.B. "2025-10-11T11:00:00.000000Z"
+5. **Wochennummer**: Wird automatisch aus dem Namen extrahiert (z.B. "Proxima 0-1" → Woche 0)
 
 ### Punktzahl-Klassifizierung:
 - 🟢 **Hoch** (≥500): Grün mit Glow-Effekt
@@ -193,5 +195,6 @@ Bei Problemen oder Fragen:
 ---
 
 **Letzte Aktualisierung:** 2025-10-06  
-**Version:** 2.0  
-**Status:** ✅ Funktionsfähig
+**Version:** 2.1  
+**Status:** ✅ Voll funktionsfähig mit Live-API  
+**Aktuelle Daten:** 60 Proxima-Planeten (Woche 0)

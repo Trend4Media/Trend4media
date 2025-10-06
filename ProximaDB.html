@@ -490,7 +490,8 @@
     <script>
         // ProximaDB API Endpoint - Try multiple sources
         const API_ENDPOINTS = [
-            './proxima_data.json',  // Local file first
+            'https://beta2.game.spacenations.eu/api/proxima',  // Live API first
+            './proxima_data.json',  // Local file backup
             'proxima_data.json',    // Alternative local path
             'https://spacenations-tools-production.up.railway.app/proxima_data.json'  // Production fallback
         ];
@@ -559,14 +560,32 @@
                 return;
             }
             
-            // Konvertiere Array-Format zu Objekt-Format
-            const planetObjects = planets.map(planet => ({
-                name: planet[0],
-                coordinates: planet[1],
-                score: planet[2],
-                deleteOn: planet[3],
-                weekNumber: planet[4]
-            }));
+            // Konvertiere beide Formate zu einheitlichem Objekt-Format
+            const planetObjects = planets.map(planet => {
+                // Neues API-Format: {name, coordinates, score, deleteOn}
+                if (typeof planet === 'object' && planet.name) {
+                    return {
+                        name: planet.name,
+                        coordinates: planet.coordinates,
+                        score: planet.score,
+                        deleteOn: planet.deleteOn,
+                        weekNumber: extractWeekNumber(planet.name)
+                    };
+                }
+                // Altes Array-Format: [name, coordinates, score, deleteOn, weekNumber]
+                else if (Array.isArray(planet)) {
+                    return {
+                        name: planet[0],
+                        coordinates: planet[1],
+                        score: planet[2],
+                        deleteOn: planet[3],
+                        weekNumber: planet[4] || extractWeekNumber(planet[0])
+                    };
+                }
+                else {
+                    throw new Error('Unbekanntes Datenformat');
+                }
+            });
             
             // Statistiken berechnen
             const totalPlanets = planetObjects.length;
@@ -625,6 +644,11 @@
                     <p>Datenquelle: Spacenations API</p>
                 </div>
             `;
+        }
+        
+        function extractWeekNumber(planetName) {
+            const match = planetName.match(/Proxima (\d+)-/);
+            return match ? parseInt(match[1]) : 0;
         }
         
         function getScoreClass(score) {
