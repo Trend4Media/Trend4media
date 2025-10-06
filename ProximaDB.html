@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProximaDB - Spacenations Tools</title>
+    
+    <!-- Modern Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Razer Color Scheme */
+            --razer-green: #00FF88;
+            --razer-green-dark: #00CC6A;
+            --razer-green-light: #44FF99;
+            --razer-black: #0A0A0A;
+            --razer-dark: #111111;
+            --razer-gray: #1A1A1A;
+            --razer-gray-light: #2A2A2A;
+            --razer-white: #FFFFFF;
+            --razer-silver: #C0C0C0;
+            
+            --text-primary: var(--razer-white);
+            --text-secondary: var(--razer-silver);
+            --text-accent: var(--razer-green);
+            
+            --bg-primary: var(--razer-black);
+            --bg-secondary: var(--razer-dark);
+            --bg-tertiary: var(--razer-gray);
+            --bg-card: var(--razer-gray-light);
+            
+            --glow-green: 0 0 20px rgba(0, 255, 136, 0.5);
+            --glow-green-strong: 0 0 30px rgba(0, 255, 136, 0.8);
+            --shadow-dark: 0 8px 32px rgba(0, 0, 0, 0.6);
+            
+            --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+            --font-gaming: 'Orbitron', monospace;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: var(--font-primary);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+        
+        /* Animated Background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(0, 255, 136, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(0, 255, 136, 0.05) 0%, transparent 50%),
+                linear-gradient(45deg, var(--razer-black) 0%, var(--razer-dark) 100%);
+            z-index: -1;
+            animation: backgroundPulse 8s ease-in-out infinite;
+        }
+        
+        @keyframes backgroundPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+        
+        /* Header Navigation */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 255, 136, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 80px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            text-decoration: none;
+            color: var(--text-primary);
+            font-family: var(--font-gaming);
+            font-weight: 700;
+            font-size: 28px;
+            transition: all 0.3s ease;
+        }
+        
+        .logo:hover {
+            color: var(--razer-green);
+            text-shadow: var(--glow-green);
+            transform: scale(1.05);
+        }
+        
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--razer-green), var(--razer-green-light));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--razer-black);
+            font-weight: 800;
+            font-size: 18px;
+            box-shadow: var(--glow-green);
+            animation: logoGlow 3s ease-in-out infinite;
+        }
+        
+        @keyframes logoGlow {
+            0%, 100% { box-shadow: var(--glow-green); }
+            50% { box-shadow: var(--glow-green-strong); }
+        }
+        
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 14px 28px;
+            border: 2px solid transparent;
+            border-radius: 8px;
+            font-family: var(--font-gaming);
+            font-weight: 600;
+            font-size: 16px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+        
+        .btn:hover::before {
+            left: 100%;
+        }
+        
+        .btn-primary {
+            background: var(--razer-green);
+            color: var(--razer-black);
+            border-color: var(--razer-green);
+            box-shadow: var(--glow-green);
+        }
+        
+        .btn-primary:hover {
+            background: var(--razer-green-light);
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: var(--glow-green-strong);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--razer-green);
+            border-color: var(--razer-green);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--razer-green);
+            color: var(--razer-black);
+            transform: translateY(-2px);
+            box-shadow: var(--glow-green);
+        }
+        
+        /* Main Content */
+        .main-content {
+            margin-top: 80px;
+            padding: 40px 32px;
+            min-height: calc(100vh - 80px);
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: var(--bg-secondary);
+            border-radius: 15px;
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            box-shadow: var(--shadow-dark);
+            overflow: hidden;
+        }
+        
+        .page-header {
+            background: linear-gradient(135deg, var(--razer-green) 0%, var(--razer-green-dark) 100%);
+            color: var(--razer-black);
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        
+        .page-header h1 {
+            font-family: var(--font-gaming);
+            font-size: clamp(32px, 5vw, 48px);
+            font-weight: 900;
+            margin-bottom: 16px;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .page-header p {
+            font-size: 18px;
+            font-weight: 500;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 80px 40px;
+            font-size: 18px;
+            color: var(--text-secondary);
+        }
+        
+        .error {
+            text-align: center;
+            padding: 80px 40px;
+            color: #ff6b6b;
+            background: rgba(255, 107, 107, 0.1);
+            margin: 20px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 107, 107, 0.3);
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            padding: 32px;
+            background: var(--bg-tertiary);
+            border-bottom: 1px solid rgba(0, 255, 136, 0.2);
+        }
+        
+        .stat {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-family: var(--font-gaming);
+            font-size: 2.5em;
+            font-weight: 800;
+            color: var(--razer-green);
+            margin-bottom: 8px;
+            text-shadow: var(--glow-green);
+        }
+        
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 14px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .table-container {
+            padding: 32px;
+            overflow-x: auto;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        th, td {
+            padding: 16px 12px;
+            text-align: left;
+            border-bottom: 1px solid rgba(0, 255, 136, 0.1);
+        }
+        
+        th {
+            background: var(--bg-tertiary);
+            font-weight: 700;
+            color: var(--razer-green);
+            font-family: var(--font-gaming);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 14px;
+        }
+        
+        tr:hover {
+            background: rgba(0, 255, 136, 0.05);
+        }
+        
+        .week-badge {
+            background: var(--razer-green);
+            color: var(--razer-black);
+            padding: 6px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 700;
+            font-family: var(--font-gaming);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .score-high {
+            color: var(--razer-green);
+            font-weight: 700;
+            text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+        }
+        
+        .score-medium {
+            color: #ffd700;
+            font-weight: 700;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+        
+        .score-low {
+            color: #ff6b6b;
+            font-weight: 700;
+            text-shadow: 0 0 10px rgba(255, 107, 107, 0.5);
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 32px;
+            color: var(--text-secondary);
+            background: var(--bg-tertiary);
+            border-top: 1px solid rgba(0, 255, 136, 0.2);
+        }
+        
+        .refresh-btn {
+            background: var(--razer-green);
+            color: var(--razer-black);
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 700;
+            font-family: var(--font-gaming);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 10px;
+            transition: all 0.3s ease;
+            box-shadow: var(--glow-green);
+        }
+        
+        .refresh-btn:hover {
+            background: var(--razer-green-light);
+            transform: translateY(-2px);
+            box-shadow: var(--glow-green-strong);
+        }
+        
+        .back-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            color: var(--razer-black);
+            border: 2px solid var(--razer-black);
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            font-family: var(--font-gaming);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .back-btn:hover {
+            background: var(--razer-black);
+            color: var(--razer-green);
+            transform: translateY(-2px);
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .main-content {
+                padding: 20px 16px;
+            }
+            
+            .page-header {
+                padding: 30px 20px;
+            }
+            
+            .stats {
+                flex-direction: column;
+                gap: 20px;
+                padding: 20px;
+            }
+            
+            .table-container {
+                padding: 20px;
+            }
+            
+            .nav {
+                padding: 0 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Navigation -->
+    <header class="header">
+        <div class="nav">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">SN</div>
+                <span>Spacenations</span>
+            </a>
+            
+            <div class="nav-actions">
+                <a href="https://spacenations.eu" target="_blank" class="btn btn-primary">
+                    Zum Spiel
+                </a>
+                <a href="register.html" class="btn btn-secondary">
+                    Login
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <div class="page-header">
+                <a href="index.html" class="back-btn">← Zurück</a>
+                <h1>🌌 ProximaDB</h1>
+                <p>Spacenations Tools - Planetenverfolgung</p>
+                <button class="refresh-btn" onclick="loadData()">🔄 Aktualisieren</button>
+            </div>
+            
+            <div id="content">
+                <div class="loading">
+                    <p>Lade Proxima-Daten...</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // ProximaDB API Endpoint - Try multiple sources
+        const API_ENDPOINTS = [
+            './proxima_data.json',  // Local file first
+            'proxima_data.json',    // Alternative local path
+            'https://spacenations-tools-production.up.railway.app/proxima_data.json'  // Production fallback
+        ];
+        
+        async function loadData() {
+            const content = document.getElementById('content');
+            content.innerHTML = '<div class="loading"><p>Lade Proxima-Daten...</p></div>';
+            
+            let lastError = null;
+            
+            // Try each endpoint
+            for (const endpoint of API_ENDPOINTS) {
+                try {
+                    console.log(`Versuche Daten zu laden von: ${endpoint}`);
+                    const response = await fetch(endpoint);
+                    
+                    if (!response.ok) {
+                        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                    }
+                    
+                    const data = await response.json();
+                    console.log('Daten erfolgreich geladen:', data);
+                    displayData(data);
+                    return; // Success! Exit the function
+                    
+                } catch (error) {
+                    console.warn(`Fehler beim Laden von ${endpoint}:`, error);
+                    lastError = error;
+                    // Continue to next endpoint
+                }
+            }
+            
+            // If we get here, all endpoints failed
+            console.error('Alle Endpunkte fehlgeschlagen. Letzter Fehler:', lastError);
+            content.innerHTML = `
+                <div class="error">
+                    <h3>⚠️ Fehler beim Laden der Daten</h3>
+                    <p>Die Proxima-Daten konnten nicht von keiner Quelle geladen werden.</p>
+                    <p><strong>Letzter Fehler:</strong> ${lastError ? lastError.message : 'Unbekannt'}</p>
+                    <hr style="border: none; border-top: 1px solid rgba(255, 107, 107, 0.3); margin: 20px 0;">
+                    <h4>Mögliche Lösungen:</h4>
+                    <ul style="text-align: left; display: inline-block; margin: 20px auto;">
+                        <li>Stellen Sie sicher, dass <code>proxima_data.json</code> existiert</li>
+                        <li>Überprüfen Sie die API-Verbindung zur Spacenations-Plattform</li>
+                        <li>Kontaktieren Sie den Administrator für Hilfe</li>
+                    </ul>
+                    <button class="refresh-btn" onclick="loadData()">🔄 Erneut versuchen</button>
+                </div>
+            `;
+        }
+        
+        function displayData(planets) {
+            if (!Array.isArray(planets)) {
+                throw new Error('Ungültiges Datenformat - Array erwartet');
+            }
+            
+            if (planets.length === 0) {
+                const content = document.getElementById('content');
+                content.innerHTML = `
+                    <div class="error">
+                        <h3>📭 Keine Daten verfügbar</h3>
+                        <p>Es sind derzeit keine Proxima-Planeten in der Datenbank.</p>
+                        <button class="refresh-btn" onclick="loadData()">🔄 Erneut versuchen</button>
+                    </div>
+                `;
+                return;
+            }
+            
+            // Konvertiere Array-Format zu Objekt-Format
+            const planetObjects = planets.map(planet => ({
+                name: planet[0],
+                coordinates: planet[1],
+                score: planet[2],
+                deleteOn: planet[3],
+                weekNumber: planet[4]
+            }));
+            
+            // Statistiken berechnen
+            const totalPlanets = planetObjects.length;
+            const weekNumbers = [...new Set(planetObjects.map(p => p.weekNumber))];
+            const latestWeek = Math.max(...weekNumbers);
+            
+            // Planeten nach Punktzahl sortieren (höchste zuerst)
+            planetObjects.sort((a, b) => {
+                return b.score - a.score;
+            });
+            
+            const content = document.getElementById('content');
+            content.innerHTML = `
+                <div class="stats">
+                    <div class="stat">
+                        <div class="stat-number">${totalPlanets}</div>
+                        <div class="stat-label">Planeten</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">${latestWeek}</div>
+                        <div class="stat-label">Aktuelle Woche</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">${new Date().toLocaleDateString('de-DE')}</div>
+                        <div class="stat-label">Letzte Aktualisierung</div>
+                    </div>
+                </div>
+                
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Koordinaten</th>
+                                <th>Punkte</th>
+                                <th>Tag der Zerstörung</th>
+                                <th>Woche</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${planetObjects.map(planet => `
+                                <tr>
+                                    <td><strong>${planet.name}</strong></td>
+                                    <td><code>${planet.coordinates}</code></td>
+                                    <td class="${getScoreClass(planet.score)}">${planet.score.toLocaleString()}</td>
+                                    <td>${formatDeleteDate(planet.deleteOn)}</td>
+                                    <td><span class="week-badge">Woche ${planet.weekNumber}</span></td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="footer">
+                    <p>Automatisch aktualisiert jeden Mittwoch um 18:45 Uhr</p>
+                    <p>Datenquelle: Spacenations API</p>
+                </div>
+            `;
+        }
+        
+        function getScoreClass(score) {
+            if (score >= 500) return 'score-high';
+            if (score >= 200) return 'score-medium';
+            return 'score-low';
+        }
+        
+        function formatDeleteDate(deleteOnStr) {
+            try {
+                const date = new Date(deleteOnStr);
+                return date.toLocaleDateString('de-DE') + ' ' + date.toLocaleTimeString('de-DE', {hour: '2-digit', minute: '2-digit'});
+            } catch (e) {
+                return deleteOnStr;
+            }
+        }
+        
+        // Beim Laden der Seite Daten laden
+        document.addEventListener('DOMContentLoaded', loadData);
+    </script>
+</body>
+</html>
