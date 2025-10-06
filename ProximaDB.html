@@ -340,6 +340,14 @@
             background: rgba(0, 255, 136, 0.05);
         }
         
+        .coordinates {
+            color: var(--razer-white);
+            font-size: 18px;
+            font-weight: 600;
+            font-family: var(--font-gaming);
+            letter-spacing: 1px;
+        }
+        
         .week-badge {
             background: var(--razer-green);
             color: var(--razer-black);
@@ -629,7 +637,7 @@
                             ${planetObjects.map(planet => `
                                 <tr>
                                     <td><strong>${planet.name}</strong></td>
-                                    <td><code>${planet.coordinates}</code></td>
+                                    <td><span class="coordinates">${planet.coordinates}</span></td>
                                     <td class="${getScoreClass(planet.score)}">${planet.score.toLocaleString()}</td>
                                     <td>${formatDeleteDate(planet.deleteOn)}</td>
                                     <td><span class="week-badge">Woche ${planet.weekNumber}</span></td>
